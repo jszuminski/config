@@ -20,6 +20,16 @@ vim.api.nvim_create_autocmd("BufEnter", {
   end,
 })
 
+-- If there's only NvimTree left after hitting :q, quick the editor.
+vim.api.nvim_create_autocmd("BufEnter", {
+  nested = true,
+  callback = function()
+    if #vim.api.nvim_list_wins() == 1 and vim.bo.filetype == "NvimTree" then
+      vim.cmd("quit")
+    end
+  end,
+})
+
 -- Actually make Ctrl+C copy to clipboard inside nvim
 -- @TODO: This doesn't work
 vim.keymap.set("v", "<leader>c", '"+y', { noremap = true, silent = true })
