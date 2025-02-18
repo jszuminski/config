@@ -9,12 +9,35 @@ return {
   config = function()
     require("mason").setup()
     require("mason-lspconfig").setup({
-      ensure_installed = { "ts_ls" }, -- auto-install TypeScript LSP
+      ensure_installed = {
+        "html",
+        "cssls",
+        "ts_ls",
+        "pyright"
+      },
     })
 
     local lspconfig = require("lspconfig")
 
+    lspconfig.html.setup({
+      capabilities = require("cmp_nvim_lsp").default_capabilities(),
+    })
+
+    lspconfig.cssls.setup({
+      capabilities = require("cmp_nvim_lsp").default_capabilities(),
+    })
+
     lspconfig["ts_ls"].setup({
+      capabilities = require("cmp_nvim_lsp").default_capabilities(),
+      filetypes = {
+        "javascript",
+        "typescript",
+        "javascriptreact",
+        "typescriptreact"
+      },
+    })
+
+    lspconfig.pyright.setup({
       capabilities = require("cmp_nvim_lsp").default_capabilities(),
     })
   end,
