@@ -31,8 +31,8 @@ vim.api.nvim_create_autocmd("BufEnter", {
 })
 
 -- Actually make Ctrl+C copy to clipboard inside nvim
--- @TODO: This doesn't work
-vim.keymap.set("v", "<leader>c", '"+y', { noremap = true, silent = true })
+-- binding to Command+C happens at terminal level (iterm2 keyboard settings)
+vim.keymap.set("v", "<C-c>", '"+y', { noremap = true, silent = true })
 
 require("config.lazy")
 
