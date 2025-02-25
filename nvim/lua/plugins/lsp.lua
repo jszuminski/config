@@ -13,7 +13,7 @@ return {
         "html",
         "cssls",
         "ts_ls",
-        "pyright"
+        "basedpyright"
       },
     })
 
@@ -37,7 +37,7 @@ return {
       },
     })
 
-    lspconfig.pyright.setup({
+    lspconfig.basedpyright.setup({
       capabilities = require("cmp_nvim_lsp").default_capabilities(),
     })
   end,
