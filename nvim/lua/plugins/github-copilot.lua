@@ -8,7 +8,7 @@ return {
         enabled = true,
         auto_trigger = true,
         hide_during_completion = true,
-        debounce = 75,
+        debounce = 45,
         keymap = {
           accept      = "<Tab>",
           accept_word = false,
