@@ -19,18 +19,19 @@ return {
 			},
 		})
 
+		local capabilities = require("cmp_nvim_lsp")
 		local lspconfig = require("lspconfig")
 
 		lspconfig.html.setup({
-			capabilities = require("cmp_nvim_lsp").default_capabilities(),
+			capabilities = capabilities.default_capabilities(),
 		})
 
 		lspconfig.cssls.setup({
-			capabilities = require("cmp_nvim_lsp").default_capabilities(),
+			capabilities = capabilities.default_capabilities(),
 		})
 
 		lspconfig["ts_ls"].setup({
-			capabilities = require("cmp_nvim_lsp").default_capabilities(),
+			capabilities = capabilities.default_capabilities(),
 			filetypes = {
 				"javascript",
 				"typescript",
