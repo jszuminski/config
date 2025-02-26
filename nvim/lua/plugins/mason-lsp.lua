@@ -16,6 +16,7 @@ return {
 				"cssls",
 				"ts_ls",
 				"basedpyright",
+				"tailwindcss",
 			},
 		})
 
@@ -43,5 +44,7 @@ return {
 		lspconfig.basedpyright.setup({
 			capabilities = require("cmp_nvim_lsp").default_capabilities(),
 		})
+
+		lspconfig.tailwindcss.setup({})
 	end,
 }
