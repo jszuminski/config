@@ -1,0 +1,63 @@
+{
+  // Just the most beautiful font for coding
+  "editor.fontFamily": "JetBrainsMonoNL Nerd Font Mono",
+  "editor.fontSize": 12,
+  "editor.fontWeight": 350,
+  "editor.fontLigatures": false,
+  "workbench.colorTheme": "monokai-charcoal (gray)",
+  "vscode_custom_css.imports": [
+    "file:///Users/jakub.szuminski/.config/.vscode/custom-styles.css"
+  ],
+
+  /**
+   * Just necessary for Vim-like navigation to work in Cursor
+   * https://github.com/getcursor/cursor/issues/1570
+   */
+  "workbench.activityBar.orientation": "vertical",
+  "editor.lineNumbers": "relative",
+
+  /** Formatting */
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "prettier.bracketSpacing": true,
+  "prettier.bracketSameLine": false,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "always"
+  },
+  "eslint.validate": ["javascript", "typescript"],
+
+  /** For minimalism */
+  "breadcrumbs.enabled": false,
+  "editor.minimap.enabled": false,
+  "workbench.statusBar.visible": false,
+  "workbench.editor.tabActionCloseVisibility": false,
+  "workbench.activityBar.location": "hidden",
+  "editor.renderWhitespace": "none",
+
+  "editor.renderLineHighlight": "none",
+  "workbench.colorCustomizations": {
+    "editorLineNumber.foreground": "#404040",
+    "editorLineNumber.activeForeground": "#595959",
+    "tab.activeBorder": "#474747",
+    "tab.border": "#000000" // let's not show the border at all; unnecessary
+  },
+
+  "workbench.sideBar.location": "left",
+  "material-icon-theme.hidesExplorerArrows": true,
+  "workbench.iconTheme": "material-icon-theme",
+  "explorer.compactFolders": false,
+  "explorer.confirmDragAndDrop": false,
+  "workbench.tree.indent": 8,
+
+  "editor.scrollbar.horizontal": "hidden",
+  "editor.scrollbar.vertical": "hidden",
+
+  /** Other **/
+  "window.commandCenter": false,
+  "typescript.preferences.importModuleSpecifier": "relative",
+  "window.zoomLevel": 0.7,
+  "eslint.workingDirectories": ["./uni-flyways-network-management"],
+  "workbench.statusBar.visible": false,
+  "workbench.fontAliasing": "antialiased"
+}
+
