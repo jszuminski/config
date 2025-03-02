@@ -17,6 +17,8 @@ return {
 				"ts_ls",
 				"basedpyright",
 				"tailwindcss",
+				"rust_analyzer",
+				"clangd", -- C/C++
 			},
 		})
 
