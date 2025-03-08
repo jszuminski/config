@@ -17,10 +17,14 @@
   "editor.lineNumbers": "relative",
 
   /** Formatting */
+  "editor.tabSize": 2,
   "editor.formatOnSave": true,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
+  // "editor.defaultFormatter": "rvest.vs-code-prettier-eslint",
   "prettier.bracketSpacing": true,
   "prettier.bracketSameLine": false,
+  "prettier.singleQuote": true,
+  "prettier.jsxSingleQuote": true,
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": "always"
   },
@@ -31,7 +35,6 @@
   "editor.minimap.enabled": false,
   "workbench.statusBar.visible": false,
   "workbench.editor.tabActionCloseVisibility": false,
-  "workbench.activityBar.location": "hidden",
   "editor.renderWhitespace": "none",
 
   "editor.renderLineHighlight": "none",
@@ -55,9 +58,12 @@
   /** Other **/
   "window.commandCenter": false,
   "typescript.preferences.importModuleSpecifier": "relative",
-  "window.zoomLevel": 0.7,
+  "window.zoomLevel": -0.6,
   "eslint.workingDirectories": ["./uni-flyways-network-management"],
   "workbench.statusBar.visible": false,
-  "workbench.fontAliasing": "antialiased"
+  "workbench.fontAliasing": "antialiased",
+  "workbench.layoutControl.enabled": false,
+  "workbench.editor.enablePreview": false,
+  "workbench.activityBar.location": "hidden"
 }
 

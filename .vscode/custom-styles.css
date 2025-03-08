@@ -1,0 +1,81 @@
+/* Change the font for everything in VSCode */
+.monaco-workbench {
+  font-family: "JetBrainsMonoNL Nerd Font Mono", sans-serif !important;
+}
+
+/* Change font in the Command Palette & Quick Open (Ctrl+P) */
+.quick-input-widget {
+  font-family: "JetBrainsMonoNL Nerd Font Mono", sans-serif !important;
+}
+
+/* Change font in the Sidebar (Explorer, Files, Extensions, etc.) */
+.monaco-workbench .part.sidebar {
+  font-family: "JetBrainsMonoNL Nerd Font Mono", sans-serif !important;
+}
+
+/* Change font in the Title Bar (If using custom title bar) */
+.monaco-workbench .part.titlebar {
+  font-family: "JetBrainsMonoNL Nerd Font Mono", sans-serif !important;
+}
+
+/* Change font in Editor Tabs */
+.monaco-workbench .part.editor .tabs-container {
+  font-family: "JetBrainsMonoNL Nerd Font Mono", sans-serif !important;
+}
+
+/* Change font in Status Bar */
+.monaco-workbench .part.statusbar {
+  font-family: "JetBrainsMonoNL Nerd Font Mono", sans-serif !important;
+}
+
+/* Change font in Settings UI */
+.settings-editor {
+  font-family: "JetBrainsMonoNL Nerd Font Mono", sans-serif !important;
+}
+
+.explorer-viewlet .monaco-list-row {
+  font-family: "JetBrainsMonoNL Nerd Font Mono", sans-serif !important;
+  font-size: 11px !important;
+}
+
+.explorer-viewlet {
+  font-family: "JetBrainsMonoNL Nerd Font Mono", sans-serif !important;
+  font-size: 11px !important;
+}
+
+.quick-input-widget .monaco-list-row,
+.quick-input-widget .monaco-list-row * {
+  font-family: "JetBrainsMonoNL Nerd Font Mono", sans-serif !important;
+}
+
+.panel .tabs-container,
+.panel .tabs-container * {
+  font-family: "JetBrainsMonoNL Nerd Font Mono", sans-serif !important;
+}
+
+.monaco-panel .tabs-container,
+.monaco-panel .tabs-container * {
+  font-family: "JetBrainsMonoNL Nerd Font Mono", sans-serif !important;
+}
+
+.titlebar-button-container {
+  display: none !important;
+}
+
+/* Change font in the entire Search view (container and its children) */
+.search-view,
+.search-view * {
+  font-family: "JetBrainsMonoNL Nerd Font Mono", sans-serif !important;
+}
+
+/* Change font in the search input box */
+.search-widget .monaco-inputbox,
+.search-widget .monaco-inputbox * {
+  font-family: "JetBrainsMonoNL Nerd Font Mono", sans-serif !important;
+}
+
+/* Change font in the search results list */
+.search-view .monaco-list-row,
+.search-view .monaco-list-row * {
+  font-family: "JetBrainsMonoNL Nerd Font Mono", sans-serif !important;
+}
