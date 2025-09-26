@@ -1,13 +1,15 @@
-vim.g.mapleader = " "
-vim.g.maplocalleader = "\\"
+vim.g.mapleader = " " -- can be used in keymaps as <leader>
+vim.g.maplocalleader = "\\" -- can be used in keymaps as <localleader>
 
-vim.opt.number = true -- Show line numbers
-vim.opt.relativenumber = true -- Relative line numbers
-vim.opt.tabstop = 2 -- Tab size
-vim.opt.shiftwidth = 2 -- Indent size
-vim.opt.expandtab = true -- Use spaces instead of tabs
-vim.opt.smartindent = true -- Auto-indent
-vim.opt.termguicolors = true -- Enable true colors
+vim.opt.number = true -- show line numbers
+vim.opt.relativenumber = true -- relative line numbers
+
+vim.opt.tabstop = 4 -- tab size
+vim.opt.shiftwidth = 4 -- indent size
+vim.opt.expandtab = true -- use spaces instead of tabs
+vim.opt.smartindent = true -- auto-indent
+
+vim.opt.termguicolors = true -- enable true colors
 
 -- Do not go back to normal mode after changing tabs
 vim.api.nvim_set_keymap("v", ">", ">gv", { noremap = true, silent = true })
@@ -25,7 +27,11 @@ vim.api.nvim_create_autocmd("BufEnter", {
 })
 
 -- Actually make Ctrl+C copy to clipboard inside nvim
--- binding to Command+C happens at terminal level (iterm2 keyboard settings)
+-- binding to Command+C happens at terminal level (wezterm)
 vim.keymap.set("v", "<C-c>", '"+y', { noremap = true, silent = true })
+
+-- Use Command + S to save files
+vim.keymap.set("n", "<D-s>", ":w<CR>", { noremap = true, silent = true, desc = "Save file" })
+vim.keymap.set("i", "<D-s>", "<Esc>:w<CR>a", { noremap = true, silent = true, desc = "Save file" })
 
 require("config.lazy")
