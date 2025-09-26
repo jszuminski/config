@@ -34,4 +34,7 @@ vim.keymap.set("v", "<C-c>", '"+y', { noremap = true, silent = true })
 vim.keymap.set("n", "<D-s>", ":w<CR>", { noremap = true, silent = true, desc = "Save file" })
 vim.keymap.set("i", "<D-s>", "<Esc>:w<CR>a", { noremap = true, silent = true, desc = "Save file" })
 
+-- Use Command + A to select everything in the current file
+vim.keymap.set("n", "<D-a>", "ggVG", { noremap = true, silent = true, desc = "Select all" })
+
 require("config.lazy")

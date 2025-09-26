@@ -2,6 +2,8 @@ local wezterm = require("wezterm")
 
 local config = wezterm.config_builder()
 
+config.hide_tab_bar_if_only_one_tab = true
+
 -- for example, we want Command+C to trigger standard Ctrl+C
 -- in order to be able to paste in a standard MacOS way
 -- but in order to do that, we need to send the key for Ctrl+C
@@ -13,6 +15,11 @@ config.keys = {
 		key = "s",
 		mods = "CMD",
 		action = wezterm.action.SendString(":w\n"),
+	},
+	{
+		key = "a",
+		mods = "CMD",
+		action = wezterm.action.SendString("\x1bggVG"),
 	},
 }
 
