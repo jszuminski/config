@@ -5,11 +5,16 @@ return {
 			format_on_save = {
 				enabled = true,
 				lsp_format = "fallback",
+				lsp_fallback = false,
 			},
 			formatters_by_ft = {
 				lua = { "stylua" },
 				python = { "isort", "black" },
-				javascript = { "prettier" },
+				json = { "eslint_d", "prettier" },
+				javascript = { "eslint_d", "prettier" },
+				typescript = { "eslint_d", "prettier" },
+				javascriptreact = { "eslint_d", "prettier" },
+				typescriptreact = { "eslint_d", "prettier" },
 			},
 			formatters = {
 				prettier = {
