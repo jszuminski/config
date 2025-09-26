@@ -48,5 +48,7 @@ return {
 		})
 
 		lspconfig.tailwindcss.setup({})
+
+		vim.keymap.set("n", "gl", vim.diagnostic.open_float, { desc = "Show line diagnostics" })
 	end,
 }
