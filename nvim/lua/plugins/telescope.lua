@@ -26,6 +26,8 @@ return {
 		-- Search inside files (like Shift+Shift in Pycharm)
 		vim.keymap.set("n", "<C-g>", "<cmd>Telescope live_grep<CR>", { noremap = true, silent = true })
 
+		vim.keymap.set("n", "gd", "<cmd>Telescope lsp_definitions<CR>", { desc = "Telescope: go to definition" })
+
 		-- Find all references of a method/variable the cursor's on
 		vim.keymap.set("n", "gr", "<cmd>Telescope lsp_references<CR>", {
 			desc = "LSP: Find references",

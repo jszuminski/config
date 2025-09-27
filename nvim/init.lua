@@ -4,8 +4,8 @@ vim.g.maplocalleader = "\\" -- can be used in keymaps as <localleader>
 vim.opt.number = true -- show line numbers
 vim.opt.relativenumber = true -- relative line numbers
 
-vim.opt.tabstop = 4 -- tab size
-vim.opt.shiftwidth = 4 -- indent size
+vim.opt.tabstop = 2 -- tab size
+vim.opt.shiftwidth = 2 -- indent size
 vim.opt.expandtab = true -- use spaces instead of tabs
 vim.opt.smartindent = true -- auto-indent
 
