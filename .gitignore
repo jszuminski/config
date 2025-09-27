@@ -16,4 +16,5 @@ tmux/~/
 
 !readme.md
 !.gitignore
+!keychron_keymap.json
 
