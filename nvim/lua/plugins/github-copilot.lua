@@ -10,7 +10,7 @@ return {
 				hide_during_completion = true,
 				debounce = 60,
 				keymap = {
-					accept = "<C-CR>", -- @todo figure out what's the most convenient and fastest for me
+					accept = "<C-l>", -- @todo figure out what's the most convenient and fastest for me
 					accept_word = false,
 					accept_line = false,
 					next = "<M-]>",
