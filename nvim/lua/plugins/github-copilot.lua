@@ -5,12 +5,12 @@ return {
 	config = function()
 		require("copilot").setup({
 			suggestion = {
-				enabled = false,
+				enabled = true,
 				auto_trigger = true,
 				hide_during_completion = true,
-				debounce = 45,
+				debounce = 60,
 				keymap = {
-					accept = "<C-l>", -- @todo figure out what's the most convenient and fastest for me
+					accept = "<C-CR>", -- @todo figure out what's the most convenient and fastest for me
 					accept_word = false,
 					accept_line = false,
 					next = "<M-]>",
