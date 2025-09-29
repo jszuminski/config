@@ -11,8 +11,9 @@ config.harfbuzz_features = { "calt = 0", "clig = 0", "liga = 0" }
 -- in order to be able to paste in a standard MacOS way
 -- but in order to do that, we need to send the key for Ctrl+C
 -- as NVIM and TMUX and others do not support Command
-local command_keys = { "c", "p", "u", "l", "Enter" }
+local command_keys = { "c", "p", "g", "u", "l", "Enter" }
 
+-- @TODO: send those strings only when in NVIM selected pane
 config.keys = {
 	{
 		key = "s",

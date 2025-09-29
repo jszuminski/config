@@ -15,6 +15,7 @@ return {
 				typescript = { "eslint_d", "prettier" },
 				javascriptreact = { "eslint_d", "prettier" },
 				typescriptreact = { "eslint_d", "prettier" },
+				rust = { "rustfmt" },
 			},
 			formatters = {
 				prettier = {
