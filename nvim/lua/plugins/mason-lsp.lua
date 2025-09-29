@@ -37,7 +37,7 @@ return {
 		-- Virtual text, underline, sorting, floating window style
 		vim.diagnostic.config({
 			virtual_text = {
-				prefix = "[X]",
+				prefix = "--",
 				spacing = 4,
 			},
 			underline = true,
