@@ -9,6 +9,8 @@ return {
 			},
 			formatters_by_ft = {
 				lua = { "stylua" },
+				-- For personal projects, prefer ruff.
+				-- For work, however, we use isort + black.
 				python = { "isort", "black" },
 				json = { "eslint_d", "prettier" },
 				javascript = { "eslint_d", "prettier" },
@@ -56,6 +58,17 @@ return {
 
 						return { "--stdin-filepath", filename }
 					end,
+				},
+				black = {
+					prepend_args = {
+						"--fast",
+					},
+				},
+				isort = {
+					prepend_args = {
+						"--profile",
+						"black",
+					},
 				},
 			},
 		})
