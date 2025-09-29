@@ -25,6 +25,12 @@ config.keys = {
 		mods = "CMD",
 		action = wezterm.action.SendString("\x1bggVG"),
 	},
+	-- in order to be able to create a new line with Shift + Enter in Claude Code
+	{
+		key = "Enter",
+		mods = "SHIFT",
+		action = wezterm.action.SendKey({ key = "Enter", mods = "ALT" }),
+	},
 }
 
 for _, k in ipairs(command_keys) do
