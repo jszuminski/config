@@ -10,6 +10,7 @@ npm i -g eslint_d prettier
 
 ```bash
 ln -s ~/.config/wezterm/wezterm.lua ~/.wezterm.lua
+ln -s ~/.config/claude-global-settings ~/.claude/settings.json
 ```
 
 ## other deps
@@ -25,6 +26,14 @@ pipx install isort
 ## helpful aliases
 
 ```
+# Modern CLI replacements for speed (used by Claude Code)
+alias ls='eza'
+alias cat='bat'
+alias grep='rg'
+alias find='fd'
+alias diff='delta'
+
+# Useful for quick Rust development
 alias cr="cargo run"
 alias cc="cargo check"
 ```

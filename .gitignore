@@ -18,3 +18,5 @@ tmux/~/
 !.gitignore
 !keychron_keymap.json
 
+!claude-global-settings.json
+
