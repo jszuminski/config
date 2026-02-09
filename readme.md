@@ -23,6 +23,19 @@ pipx install isort
 
 **note:** for personal projects use ruff
 
+## git bash edit widget on ctrl+g (just like in claude)
+```
+# Use Vim as your editor for command-line editing
+export EDITOR="vim"
+export VISUAL="vim"
+
+# Load the builtin widget
+autoload -Uz edit-command-line
+zle -N edit-command-line
+
+bindkey '^G' edit-command-line
+```
+
 ## helpful aliases
 
 ```
