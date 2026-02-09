@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(tmux show-options:*)",
+      "Bash(tmux show:*)",
+      "Bash(tmux source-file:*)",
+      "Bash(bash:*)",
+      "Bash(echo:*)",
+      "Bash(/usr/bin/grep:*)",
+      "Bash(XDG_CONFIG_HOME=\"$XDG_CONFIG_HOME:-$HOME/.config\")"
+    ]
+  }
+}
