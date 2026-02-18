@@ -49,6 +49,11 @@ config.keys = {
 		mods = "CMD",
 		action = wezterm.action.SendString("\x1bggVG"),
 	},
+	{
+		key = "v",
+		mods = "CMD",
+		action = wezterm.action.PasteFrom("Clipboard"),
+	},
 	-- in order to be able to create a new line with Shift + Enter in Claude Code
 	{
 		key = "Enter",
