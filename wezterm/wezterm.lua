@@ -31,6 +31,12 @@ config.keys = {
 		mods = "SHIFT",
 		action = wezterm.action.SendKey({ key = "Enter", mods = "ALT" }),
 	},
+	-- Paste without bracketed paste (fixes Claude Code vim mode)
+	{
+		key = "v",
+		mods = "CMD",
+		action = wezterm.action.PasteFrom("Clipboard"),
+	},
 }
 
 for _, k in ipairs(command_keys) do

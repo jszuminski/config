@@ -3,6 +3,8 @@ nvim/.env
 
 !nvim/
 !nvim/**
+!nvim*/
+!nvim*/**
 
 !tmux/
 !tmux/**

@@ -1,40 +1,33 @@
-vim.g.mapleader = " " -- can be used in keymaps as <leader>
-vim.g.maplocalleader = "\\" -- can be used in keymaps as <localleader>
+vim.g.mapleader = " "
 
-vim.opt.number = true -- show line numbers
-vim.opt.relativenumber = true -- relative line numbers
+vim.opt.number = true
+vim.opt.relativenumber = true
+vim.opt.tabstop = 2
+vim.opt.shiftwidth = 2
+vim.opt.expandtab = true
+vim.opt.smartindent = true
+vim.opt.termguicolors = true
+vim.opt.background = "dark"
 
-vim.opt.tabstop = 2 -- tab size
-vim.opt.shiftwidth = 2 -- indent size
-vim.opt.expandtab = true -- use spaces instead of tabs
-vim.opt.smartindent = true -- auto-indent
+vim.cmd.colorscheme("retrobox")
 
-vim.opt.termguicolors = true -- enable true colors
+-- Force pure black background
+vim.api.nvim_set_hl(0, "Normal", { bg = "#000000" })
+vim.api.nvim_set_hl(0, "NormalFloat", { bg = "#000000" })
+vim.api.nvim_set_hl(0, "SignColumn", { bg = "#000000" })
+vim.api.nvim_set_hl(0, "LineNr", { bg = "#000000" })
+vim.api.nvim_set_hl(0, "CursorLineNr", { bg = "#000000" })
+vim.api.nvim_set_hl(0, "EndOfBuffer", { bg = "#000000", fg = "#000000" })
 
--- Do not go back to normal mode after changing tabs
-vim.api.nvim_set_keymap("v", ">", ">gv", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("v", "<", "<gv", { noremap = true, silent = true })
+-- Bootstrap lazy.nvim
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not (vim.uv or vim.loop).fs_stat(lazypath) then
+	vim.fn.system({ "git", "clone", "--filter=blob:none", "--branch=stable",
+		"https://github.com/folke/lazy.nvim.git", lazypath })
+end
+vim.opt.rtp:prepend(lazypath)
 
--- Disable auto-continuation of comments
----- c -> auto wraps comments
----- r -> automatically insert current comment leader after <Enter>
----- o -> Automatically insert current comment leader after <o>
-vim.api.nvim_create_autocmd("BufEnter", {
-	pattern = "*",
-	callback = function()
-		vim.opt.formatoptions:remove({ "c", "r", "o" })
-	end,
+require("lazy").setup("plugins", {
+	checker = { enabled = false },
+	change_detection = { notify = false },
 })
-
--- Actually make Ctrl+C copy to clipboard inside nvim
--- binding to Command+C happens at terminal level (wezterm)
-vim.keymap.set("v", "<C-c>", '"+y', { noremap = true, silent = true })
-
--- Use Command + S to save files
-vim.keymap.set("n", "<D-s>", ":w<CR>", { noremap = true, silent = true, desc = "Save file" })
-vim.keymap.set("i", "<D-s>", "<Esc>:w<CR>a", { noremap = true, silent = true, desc = "Save file" })
-
--- Use Command + A to select everything in the current file
-vim.keymap.set("n", "<D-a>", "ggVG", { noremap = true, silent = true, desc = "Select all" })
-
-require("config.lazy")
