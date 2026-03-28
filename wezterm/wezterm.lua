@@ -3,6 +3,10 @@ local wezterm = require("wezterm")
 local config = wezterm.config_builder()
 
 config.hide_tab_bar_if_only_one_tab = true
+config.color_scheme = "Catppuccin Mocha"
+
+config.font = wezterm.font("JetBrains Mono", { weight = "Medium" })
+config.font_size = 13.0
 
 -- Disables font ligatures (ex. merging != or >= or =>)
 config.harfbuzz_features = { "calt = 0", "clig = 0", "liga = 0" }
@@ -18,7 +22,7 @@ config.keys = {
 	{
 		key = "s",
 		mods = "CMD",
-		action = wezterm.action.SendString(":w\n"),
+		action = wezterm.action.SendString(":wq\n"),
 	},
 	{
 		key = "a",

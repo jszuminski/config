@@ -9,16 +9,6 @@ vim.opt.smartindent = true
 vim.opt.termguicolors = true
 vim.opt.background = "dark"
 
-vim.cmd.colorscheme("retrobox")
-
--- Force pure black background
-vim.api.nvim_set_hl(0, "Normal", { bg = "#000000" })
-vim.api.nvim_set_hl(0, "NormalFloat", { bg = "#000000" })
-vim.api.nvim_set_hl(0, "SignColumn", { bg = "#000000" })
-vim.api.nvim_set_hl(0, "LineNr", { bg = "#000000" })
-vim.api.nvim_set_hl(0, "CursorLineNr", { bg = "#000000" })
-vim.api.nvim_set_hl(0, "EndOfBuffer", { bg = "#000000", fg = "#000000" })
-
 -- Bootstrap lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
