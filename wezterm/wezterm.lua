@@ -4,6 +4,23 @@ local config = wezterm.config_builder()
 
 config.hide_tab_bar_if_only_one_tab = true
 config.color_scheme = "Catppuccin Mocha"
+config.window_decorations = "RESIZE|INTEGRATED_BUTTONS"
+config.window_padding = { left = 8, right = 8, top = 64, bottom = 4 }
+
+-- Shift+click to open links (bypasses tmux mouse capture)
+config.bypass_mouse_reporting_modifiers = "SHIFT"
+config.mouse_bindings = {
+	{
+		event = { Up = { streak = 1, button = "Left" } },
+		mods = "SHIFT",
+		action = wezterm.action.OpenLinkAtMouseCursor,
+	},
+	{
+		event = { Down = { streak = 1, button = "Left" } },
+		mods = "SHIFT",
+		action = wezterm.action.Nop,
+	},
+}
 
 config.font = wezterm.font("JetBrains Mono", { weight = "Medium" })
 config.font_size = 13.0

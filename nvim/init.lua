@@ -8,6 +8,15 @@ vim.opt.expandtab = true
 vim.opt.smartindent = true
 vim.opt.termguicolors = true
 vim.opt.background = "dark"
+vim.opt.clipboard = "unnamedplus"
+vim.opt.undofile = true
+vim.opt.signcolumn = "yes"
+vim.opt.scrolloff = 8
+vim.opt.ignorecase = true
+vim.opt.smartcase = true
+vim.opt.splitright = true
+vim.opt.splitbelow = true
+vim.opt.cursorline = true
 
 -- Bootstrap lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
