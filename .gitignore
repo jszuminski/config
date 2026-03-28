@@ -9,6 +9,7 @@ nvim/.env
 !tmux/
 !tmux/**
 tmux/~/
+tmux/plugins/
 
 !wezterm/
 !wezterm/**
