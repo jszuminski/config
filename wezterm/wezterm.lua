@@ -15,6 +15,13 @@ config.window_padding = {
 	bottom = 10,
 }
 
+-- Font
+config.font = wezterm.font("JetBrains Mono", { weight = "Medium" })
+config.font_size = 13
+config.freetype_load_target = "Light"
+config.freetype_render_target = "HorizontalLcd"
+config.front_end = "WebGpu"
+
 -- Disables font ligatures (ex. merging != or >= or =>)
 config.harfbuzz_features = { "calt = 0", "clig = 0", "liga = 0" }
 

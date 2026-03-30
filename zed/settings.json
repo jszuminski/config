@@ -19,7 +19,10 @@
   "tab_size": 2,
   "cursor_blink": false,
 
-  "buffer_font_size": 14,
+  "buffer_font_family": "JetBrains Mono",
+  "buffer_font_weight": 500,
+  "buffer_font_size": 13,
+  "ui_font_family": "JetBrains Mono",
   "ui_font_size": 14,
 
   "show_whitespaces": "boundary",
