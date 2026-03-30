@@ -1,0 +1,8 @@
+[
+  {
+    "context": "Terminal",
+    "bindings": {
+      "escape": ["terminal::SendKeystroke", "escape"]
+    }
+  }
+]

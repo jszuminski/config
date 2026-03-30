@@ -22,3 +22,7 @@ tmux/~/
 
 !claude-global-settings.json
 
+!zed/
+!zed/**
+zed/conversations/
+zed/prompts/

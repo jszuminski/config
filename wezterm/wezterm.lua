@@ -3,6 +3,17 @@ local wezterm = require("wezterm")
 local config = wezterm.config_builder()
 
 config.hide_tab_bar_if_only_one_tab = true
+config.window_decorations = "RESIZE|INTEGRATED_BUTTONS"
+config.window_frame = {
+	active_titlebar_bg = "#000000",
+	inactive_titlebar_bg = "#000000",
+}
+config.window_padding = {
+	left = 32,
+	right = 32,
+	top = 64,
+	bottom = 10,
+}
 
 -- Disables font ligatures (ex. merging != or >= or =>)
 config.harfbuzz_features = { "calt = 0", "clig = 0", "liga = 0" }

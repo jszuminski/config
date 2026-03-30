@@ -1,0 +1,55 @@
+{
+  "theme": {
+    "mode": "system",
+    "light": "Ayu Light",
+    "dark": "Ayu Dark",
+  },
+  "icon_theme": {
+    "mode": "light",
+    "light": "Zed (Default)",
+    "dark": "Zed (Default)",
+  },
+  "session": {
+    "trust_all_worktrees": true,
+  },
+
+  "vim_mode": true,
+  "relative_line_numbers": "enabled",
+
+  "tab_size": 2,
+  "cursor_blink": false,
+
+  "buffer_font_size": 14,
+  "ui_font_size": 14,
+
+  "show_whitespaces": "boundary",
+  "indent_guides": {
+    "enabled": true,
+    "coloring": "indent_aware",
+  },
+  "inlay_hints": {
+    "enabled": true,
+  },
+  "git": {
+    "inline_blame": {
+      "enabled": true,
+    },
+  },
+  "terminal": {
+    "font_size": 13,
+    "toolbar": {
+      "breadcrumbs": false,
+    },
+  },
+  "file_scan_exclusions": [
+    "**/.git",
+    "**/node_modules",
+    "**/target",
+    "**/.next",
+    "**/dist",
+  ],
+  "telemetry": {
+    "metrics": false,
+    "diagnostics": false,
+  },
+}
