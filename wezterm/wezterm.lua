@@ -65,4 +65,14 @@ for _, k in ipairs(command_keys) do
 	})
 end
 
+-- Clickable links with Cmd+Click (works through tmux)
+config.bypass_mouse_reporting_modifiers = "CMD"
+config.mouse_bindings = {
+	{
+		event = { Up = { streak = 1, button = "Left" } },
+		mods = "CMD",
+		action = wezterm.action.OpenLinkAtMouseCursor,
+	},
+}
+
 return config
