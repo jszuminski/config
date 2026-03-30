@@ -8,6 +8,12 @@ vim.opt.expandtab = true
 vim.opt.smartindent = true
 vim.opt.termguicolors = true
 vim.opt.background = "dark"
+vim.opt.ignorecase = true
+vim.opt.smartcase = true
+vim.opt.scrolloff = 8
+vim.opt.signcolumn = "yes"
+vim.opt.clipboard = "unnamedplus"
+vim.opt.undofile = true
 
 vim.cmd.colorscheme("retrobox")
 
