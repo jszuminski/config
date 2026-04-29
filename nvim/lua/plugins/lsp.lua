@@ -29,6 +29,9 @@ return {
         "css-lsp",
         "tailwindcss-language-server",
         "astro-language-server",
+        "basedpyright",
+        "ruff",
+        "rust-analyzer",
         "stylua",
         "prettierd",
       },
@@ -93,6 +96,39 @@ return {
         },
       })
 
+      vim.lsp.config("basedpyright", {
+        settings = {
+          basedpyright = {
+            analysis = {
+              typeCheckingMode = "standard",
+              autoImportCompletions = true,
+              diagnosticMode = "openFilesOnly",
+            },
+          },
+        },
+      })
+
+      vim.lsp.config("ruff", {
+        init_options = {
+          settings = { lineLength = 100 },
+        },
+      })
+
+      vim.lsp.config("rust_analyzer", {
+        settings = {
+          ["rust-analyzer"] = {
+            cargo = { allFeatures = true },
+            checkOnSave = true,
+            check = { command = "clippy" },
+            inlayHints = {
+              parameterHints = { enable = true },
+              typeHints = { enable = true },
+              chainingHints = { enable = true },
+            },
+          },
+        },
+      })
+
       vim.lsp.enable({
         "lua_ls",
         "ts_ls",
@@ -102,6 +138,9 @@ return {
         "cssls",
         "tailwindcss",
         "astro",
+        "basedpyright",
+        "ruff",
+        "rust_analyzer",
       })
     end,
   },

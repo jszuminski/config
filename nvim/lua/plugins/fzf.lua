@@ -2,6 +2,7 @@ return {
   "ibhagwan/fzf-lua",
   cmd = "FzfLua",
   keys = {
+    { "<C-p>", function() require("fzf-lua").files() end, desc = "Find files" },
     { "<leader><space>", function() require("fzf-lua").files() end, desc = "Find files" },
     { "<leader>ff", function() require("fzf-lua").files() end, desc = "Find files" },
     { "<leader>fg", function() require("fzf-lua").live_grep() end, desc = "Live grep" },

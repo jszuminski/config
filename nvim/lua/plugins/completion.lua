@@ -23,6 +23,11 @@ return {
     },
     sources = {
       default = { "lsp", "path", "snippets", "buffer" },
+      per_filetype = {
+        markdown = { "path", "snippets" },
+        text = { "path" },
+        gitcommit = { "path" },
+      },
     },
     signature = { enabled = true, window = { border = "rounded" } },
   },

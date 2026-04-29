@@ -23,6 +23,8 @@ map("n", "<leader>bd", "<Cmd>bdelete<CR>", { desc = "Delete buffer" })
 map("n", "<S-h>", "<Cmd>bprevious<CR>", { desc = "Prev buffer" })
 map("n", "<S-l>", "<Cmd>bnext<CR>", { desc = "Next buffer" })
 
+map("n", "<leader>uw", function() vim.wo.wrap = not vim.wo.wrap end, { desc = "Toggle wrap" })
+
 map("n", "]d", function() vim.diagnostic.jump({ count = 1, float = true }) end, { desc = "Next diagnostic" })
 map("n", "[d", function() vim.diagnostic.jump({ count = -1, float = true }) end, { desc = "Prev diagnostic" })
 map("n", "<leader>cd", vim.diagnostic.open_float, { desc = "Line diagnostics" })

@@ -43,3 +43,13 @@ vim.api.nvim_create_autocmd("FileChangedShellPost", {
     vim.notify("File changed on disk - buffer reloaded", vim.log.levels.INFO)
   end,
 })
+
+vim.api.nvim_create_autocmd("FileType", {
+  group = aug,
+  pattern = { "markdown", "text", "gitcommit", "mail" },
+  callback = function()
+    vim.opt_local.wrap = true
+    vim.opt_local.linebreak = true
+    vim.opt_local.breakindent = true
+  end,
+})

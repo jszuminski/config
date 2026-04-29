@@ -10,6 +10,7 @@ return {
       { "<leader>h", group = "hunk" },
       { "<leader>b", group = "buffer" },
       { "<leader>r", group = "rename" },
+      { "<leader>u", group = "ui toggle" },
     },
   },
 }
