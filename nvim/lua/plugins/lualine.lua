@@ -1,9 +1,19 @@
 return {
   "nvim-lualine/lualine.nvim",
   event = "VeryLazy",
-  opts = {
+  opts = function()
+    local black = "#000000"
+    local theme = require("lualine.themes.tokyonight")
+    for _, mode in pairs({ "normal", "insert", "visual", "replace", "command", "inactive" }) do
+      if theme[mode] then
+        for _, section in pairs(theme[mode]) do
+          section.bg = black
+        end
+      end
+    end
+    return {
     options = {
-      theme = "tokyonight",
+      theme = theme,
       globalstatus = true,
       component_separators = "",
       section_separators = "",
@@ -23,5 +33,6 @@ return {
       lualine_y = { "progress" },
       lualine_z = { "location" },
     },
-  },
+    }
+  end,
 }

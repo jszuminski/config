@@ -27,6 +27,7 @@ opt.clipboard = "unnamedplus"
 opt.undofile = true
 opt.swapfile = false
 opt.backup = false
+opt.autoread = true
 
 opt.updatetime = 200
 opt.timeoutlen = 400

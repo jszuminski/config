@@ -8,6 +8,14 @@ return {
     },
   },
   {
+    "williamboman/mason-lspconfig.nvim",
+    dependencies = { "williamboman/mason.nvim" },
+    opts = {
+      ensure_installed = {},
+      automatic_enable = false,
+    },
+  },
+  {
     "WhoIsSethDaniel/mason-tool-installer.nvim",
     event = "VeryLazy",
     dependencies = { "williamboman/mason.nvim" },
@@ -36,7 +44,6 @@ return {
       "saghen/blink.cmp",
     },
     config = function()
-      local lspconfig = require("lspconfig")
       local capabilities = require("blink.cmp").get_lsp_capabilities()
 
       vim.diagnostic.config({
@@ -55,51 +62,47 @@ return {
         float = { border = "rounded", source = true },
       })
 
-      local on_attach = function(_, bufnr)
-        local map = function(mode, lhs, rhs, desc)
-          vim.keymap.set(mode, lhs, rhs, { buffer = bufnr, desc = desc, silent = true })
-        end
-        map("n", "gd", function() require("fzf-lua").lsp_definitions() end, "Go to definition")
-        map("n", "gD", vim.lsp.buf.declaration, "Go to declaration")
-        map("n", "gr", function() require("fzf-lua").lsp_references() end, "References")
-        map("n", "gI", function() require("fzf-lua").lsp_implementations() end, "Implementations")
-        map("n", "gy", function() require("fzf-lua").lsp_typedefs() end, "Type definition")
-        map("n", "K", vim.lsp.buf.hover, "Hover")
-        map("n", "<leader>rn", vim.lsp.buf.rename, "Rename")
-        map({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, "Code action")
-        map("n", "<leader>cs", vim.lsp.buf.signature_help, "Signature help")
-      end
+      vim.api.nvim_create_autocmd("LspAttach", {
+        group = vim.api.nvim_create_augroup("jacob-lsp", { clear = true }),
+        callback = function(args)
+          local map = function(mode, lhs, rhs, desc)
+            vim.keymap.set(mode, lhs, rhs, { buffer = args.buf, desc = desc, silent = true })
+          end
+          map("n", "gd", function() require("fzf-lua").lsp_definitions() end, "Go to definition")
+          map("n", "gD", vim.lsp.buf.declaration, "Go to declaration")
+          map("n", "gr", function() require("fzf-lua").lsp_references() end, "References")
+          map("n", "gI", function() require("fzf-lua").lsp_implementations() end, "Implementations")
+          map("n", "gy", function() require("fzf-lua").lsp_typedefs() end, "Type definition")
+          map("n", "K", vim.lsp.buf.hover, "Hover")
+          map("n", "<leader>rn", vim.lsp.buf.rename, "Rename")
+          map({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, "Code action")
+          map("n", "<leader>cs", vim.lsp.buf.signature_help, "Signature help")
+        end,
+      })
 
-      local servers = {
-        lua_ls = {
-          settings = {
-            Lua = {
-              workspace = { checkThirdParty = false },
-              telemetry = { enable = false },
-              diagnostics = { globals = { "vim" } },
-              completion = { callSnippet = "Replace" },
-            },
+      vim.lsp.config("*", { capabilities = capabilities })
+
+      vim.lsp.config("lua_ls", {
+        settings = {
+          Lua = {
+            workspace = { checkThirdParty = false },
+            telemetry = { enable = false },
+            diagnostics = { globals = { "vim" } },
+            completion = { callSnippet = "Replace" },
           },
         },
-        ts_ls = {},
-        eslint = {},
-        jsonls = {},
-        html = {},
-        cssls = {},
-        tailwindcss = {},
-        astro = {},
-      }
+      })
 
-      for name, cfg in pairs(servers) do
-        cfg.capabilities = capabilities
-        cfg.on_attach = on_attach
-        lspconfig[name].setup(cfg)
-      end
+      vim.lsp.enable({
+        "lua_ls",
+        "ts_ls",
+        "eslint",
+        "jsonls",
+        "html",
+        "cssls",
+        "tailwindcss",
+        "astro",
+      })
     end,
-  },
-  {
-    "williamboman/mason-lspconfig.nvim",
-    dependencies = { "williamboman/mason.nvim" },
-    opts = {},
   },
 }
