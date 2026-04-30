@@ -21,6 +21,11 @@ config.font_size = 13
 config.freetype_load_target = "Light"
 config.freetype_render_target = "HorizontalLcd"
 config.front_end = "WebGpu"
+config.webgpu_power_preference = "HighPerformance"
+config.max_fps = 120
+config.animation_fps = 60
+config.default_cursor_style = "SteadyBlock"
+config.cursor_blink_rate = 0
 
 -- Disables font ligatures (ex. merging != or >= or =>)
 config.harfbuzz_features = { "calt = 0", "clig = 0", "liga = 0" }
