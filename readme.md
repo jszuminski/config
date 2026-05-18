@@ -39,6 +39,7 @@ alias cc="cargo check"
 ```
 
 ## cheatsheets
+
 - [tmux](https://tmuxcheatsheet.com/)
 - [aerospace](https://cheatography.com/stevend/cheat-sheets/aerospace-window-manager/?last=1734647419)
 - [git alias](https://www.hansschnedlitz.com/git-aliases/?ref=xaviergeerinck.com)
@@ -46,9 +47,9 @@ alias cc="cargo check"
 
 ## to-do's
 
+- [ ] create a script which would set everything up (symlinks, tmux, etc.)
+- [ ] unify personal/work nvim + tmux configurations
 - [ ] allow copying from tmux selection mode with cmd+c
 - [ ] fix claude code not overriding current buffer
-- [ ] create a script which would set everything up (symlinks, tmux, etc.)
 - [ ] add makefile which would refresh each and every one piece of config
 - [ ] add zshrc common config
-
