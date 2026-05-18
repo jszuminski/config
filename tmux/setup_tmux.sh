@@ -12,8 +12,8 @@ else
   echo "✅ TPM is already installed at $TPM_DIR"
 fi
 
-# 2. Ensure .tmux.conf contains TPM initialization
-TMUX_CONF="$HOME/.config/tmux/.tmux.conf"
+# 2. Ensure tmux.conf contains TPM initialization
+TMUX_CONF="$HOME/.config/tmux/tmux.conf"
 
 if ! grep -q "run '$TPM_DIR/tpm'" "$TMUX_CONF"; then
   echo "⚙️  Adding TPM initialization to $TMUX_CONF..."
