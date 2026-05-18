@@ -2,6 +2,15 @@ local wezterm = require("wezterm")
 
 local config = wezterm.config_builder()
 
+-- Green hacker accents: cursor + selection match the tmux pane border
+config.colors = {
+	cursor_bg = "#00ff5f",
+	cursor_fg = "#000000",
+	cursor_border = "#00ff5f",
+	selection_bg = "#00ff5f",
+	selection_fg = "#000000",
+}
+
 config.hide_tab_bar_if_only_one_tab = true
 config.window_decorations = "RESIZE|INTEGRATED_BUTTONS"
 config.window_frame = {
