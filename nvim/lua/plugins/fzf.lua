@@ -36,6 +36,7 @@ return {
       glob_flag = "--iglob",
       glob_separator = "%s%-%-",
     },
+    lsp = { jump1 = true },
     keymap = {
       builtin = { ["<C-/>"] = "toggle-help", ["<C-d>"] = "preview-page-down", ["<C-u>"] = "preview-page-up" },
       fzf = { ["ctrl-q"] = "select-all+accept" },

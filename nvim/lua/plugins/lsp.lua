@@ -83,9 +83,15 @@ return {
         end,
       })
 
-      vim.lsp.config("*", { capabilities = capabilities })
+      local lspconfig = require("lspconfig")
 
-      vim.lsp.config("lua_ls", {
+      local simple_servers = { "ts_ls", "eslint", "jsonls", "html", "cssls", "tailwindcss", "astro" }
+      for _, name in ipairs(simple_servers) do
+        lspconfig[name].setup({ capabilities = capabilities })
+      end
+
+      lspconfig.lua_ls.setup({
+        capabilities = capabilities,
         settings = {
           Lua = {
             workspace = { checkThirdParty = false },
@@ -96,7 +102,8 @@ return {
         },
       })
 
-      vim.lsp.config("basedpyright", {
+      lspconfig.basedpyright.setup({
+        capabilities = capabilities,
         settings = {
           basedpyright = {
             analysis = {
@@ -108,13 +115,15 @@ return {
         },
       })
 
-      vim.lsp.config("ruff", {
+      lspconfig.ruff.setup({
+        capabilities = capabilities,
         init_options = {
           settings = { lineLength = 100 },
         },
       })
 
-      vim.lsp.config("rust_analyzer", {
+      lspconfig.rust_analyzer.setup({
+        capabilities = capabilities,
         settings = {
           ["rust-analyzer"] = {
             cargo = { allFeatures = true },
@@ -127,20 +136,6 @@ return {
             },
           },
         },
-      })
-
-      vim.lsp.enable({
-        "lua_ls",
-        "ts_ls",
-        "eslint",
-        "jsonls",
-        "html",
-        "cssls",
-        "tailwindcss",
-        "astro",
-        "basedpyright",
-        "ruff",
-        "rust_analyzer",
       })
     end,
   },
