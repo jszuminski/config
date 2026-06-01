@@ -17,6 +17,11 @@ Obsidian plugin, and works great alongside
 - Template substitutions: `{{title}}`, `{{id}}`, custom placeholders, and the
   Obsidian Templater date helpers `<% tp.file.creation_date("YYYY-MM-DD") %>`
   and `<% tp.file.last_modified_date(...) %>` (resolved natively, no Templater).
+- Prompted fields: a type can ask for extra values (author, status, ...) and
+  fill them straight into the note's YAML frontmatter, no placeholder tokens needed.
+- "Currently reading" / "current topic" pointers: persisted per vault, settable
+  via a picker (fzf-lua if present, else `vim.ui.select`), and substituted into
+  templates wherever the `currently_reading` / `current_topic` tokens appear.
 - Commands per type plus a `:Zk` picker, and a `require("zettel").create(type)` API.
 
 ## Requirements
@@ -55,15 +60,42 @@ Obsidian plugin, and works great alongside
 | `recursive`    | `true`             | Scan subfolders when computing the next ID.                        |
 | `open`         | `"edit"`           | Command used to open the new note (`"edit"`, `"vsplit"`, ...).     |
 | `date_format`  | `"%Y-%m-%d %H:%M"` | strftime format used for date placeholders.                        |
-| `types`        | `{}`               | Map of `name -> { template?, folder? }`.                           |
+| `types`        | `{}`               | Map of `name -> { template?, folder?, fields?, set_reading_when? }`. |
 | `placeholders` | `{}`               | Map of literal string -> replacement (string or `fun(ctx)`).       |
+| `link_format`  | `'"[[name]]"'`     | How `currently_reading` / `current_topic` render in templates.     |
+| `reading_folder` | `nil`            | Folder to pick the currently-reading note from.                    |
+| `topic_folder` | `nil`              | Folder to pick the current-topic note from (defaults to the vault).|
 
 A type's `folder` overrides the global `folder`; omit it to share the ID space.
 
+### Prompted fields
+
+A type can prompt for extra fields and fill them into the note's frontmatter:
+
+```lua
+literature = {
+  template = "_templates/literature.md",
+  folder = "Literature",
+  fields = {
+    { key = "author", prompt = "Author(s)", list = true },       -- comma-separated -> YAML list
+    { key = "status", prompt = "Status", type = "select",
+      choices = { "currently-reading", "read", "want-to-read" }, default = "currently-reading" },
+    { key = "pages",  prompt = "Pages" },
+  },
+  set_reading_when = { field = "status", equals = "currently-reading" },
+}
+```
+
+`fields` fill existing frontmatter keys (`author:`, `status:`, ...) in place, so
+your template stays a normal template. `set_reading_when` points the
+`currently_reading` pointer at the new note when a field matches.
+
 ## Usage
 
-- `:ZkAtom`, `:ZkMolecule`, ... — one command per configured type.
+- `:ZkAtom`, `:ZkMolecule`, `:ZkLiterature`, ... — one command per configured type.
 - `:Zk` — pick a type interactively; `:Zk atom` — create directly.
+- `:ZkSetReading` / `:ZkSetTopic` — set the currently-reading / current-topic note.
+- `:ZkReading` — open the currently-reading note.
 - `require("zettel").create("atom")` — programmatic API.
 
 ## License

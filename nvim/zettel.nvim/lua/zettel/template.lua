@@ -1,4 +1,5 @@
 local config = require("zettel.config")
+local state = require("zettel.state")
 
 local M = {}
 
@@ -64,7 +65,19 @@ function M.render(str, ctx)
   date_sub("creation_date")
   date_sub("last_modified_date")
 
-  -- Custom, vault-specific placeholders (e.g. "currently_reading").
+  -- State-backed tokens: replace `currently_reading` / `current_topic` with a
+  -- formatted link to the pointed-at note, or "" when none is set.
+  local function state_link(key)
+    local entry = state.get(key)
+    if entry and entry.name and entry.name ~= "" then
+      return opts.link_format(entry.name)
+    end
+    return ""
+  end
+  str = str:gsub("currently_reading", esc_repl(state_link("currently_reading")))
+  str = str:gsub("current_topic", esc_repl(state_link("current_topic")))
+
+  -- Custom, vault-specific placeholders.
   for key, val in pairs(opts.placeholders or {}) do
     local replacement = type(val) == "function" and (val(ctx) or "") or tostring(val)
     str = str:gsub(vim.pesc(key), esc_repl(replacement))

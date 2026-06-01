@@ -1,7 +1,18 @@
+---@class ZettelField
+---@field key      string    Frontmatter key to fill / field name.
+---@field prompt   string    Prompt text shown to the user.
+---@field type?    string    "text" (default) or "select".
+---@field choices? string[]  Options when `type == "select"`.
+---@field default? string    Default value (prefilled for text, fallback for select).
+---@field list?    boolean   Treat comma-separated input as a YAML block list.
+
 ---@class ZettelTypeConfig
----@field template? string  Template file path, relative to `vault` (or absolute).
----@field folder?   string  Folder (relative to `vault`) for this type. Defaults to the
----                         global `folder`, so several types can share one ID space.
+---@field template? string         Template file path, relative to `vault` (or absolute).
+---@field folder?   string         Folder (relative to `vault`) for this type. Defaults to the
+---                                global `folder`, so several types can share one ID space.
+---@field fields?   ZettelField[]  Extra fields to prompt for and fill into the frontmatter.
+---@field set_reading_when? { field: string, equals: string } After creating, set this note as
+---                                "currently reading" when the given field equals the value.
 
 ---@class ZettelConfig
 ---@field vault?        string                          Absolute path to the vault root (supports `~`).
@@ -11,8 +22,11 @@
 ---@field recursive?    boolean                         Scan subfolders when computing the next ID.
 ---@field open?         string                          Command used to open the new note ("edit", "vsplit", ...).
 ---@field date_format?  string                          strftime format for date placeholders.
----@field types?        table<string, ZettelTypeConfig> Note types, keyed by name (e.g. "atom").
----@field placeholders? table<string, string|fun(ctx: table):string> Literal-string placeholders to substitute in templates.
+---@field types?         table<string, ZettelTypeConfig> Note types, keyed by name (e.g. "atom").
+---@field placeholders?   table<string, string|fun(ctx: table):string> Literal-string placeholders to substitute in templates.
+---@field link_format?    fun(name: string):string        How a state pointer renders in templates. Default: quoted wiki link.
+---@field reading_folder? string                          Folder (relative to vault) to pick the currently-reading note from.
+---@field topic_folder?   string                          Folder (relative to vault) to pick the current-topic note from. Defaults to the whole vault.
 
 local M = {}
 
@@ -27,6 +41,13 @@ M.defaults = {
   date_format = "%Y-%m-%d %H:%M",
   types = {},
   placeholders = {},
+  -- How `currently_reading` / `current_topic` render. Quoted because they are
+  -- typically used inside YAML frontmatter (e.g. `reference_link: - "[[...]]"`).
+  link_format = function(name)
+    return '"[[' .. name .. ']]"'
+  end,
+  reading_folder = nil,
+  topic_folder = nil,
 }
 
 ---Resolved options (populated by `setup`).
