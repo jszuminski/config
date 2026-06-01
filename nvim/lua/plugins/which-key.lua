@@ -12,6 +12,7 @@ return {
       { "<leader>r", group = "rename" },
       { "<leader>u", group = "ui toggle" },
       { "<leader>o", group = "obsidian" },
+      { "<leader>z", group = "zettel" },
     },
   },
 }
