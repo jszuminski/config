@@ -27,6 +27,36 @@ function M.list_notes(folder, recursive)
   return notes
 end
 
+---Pick one item from a list of strings. Uses fzf-lua when available (a float,
+---which avoids the default vim.ui.select gluing its prompt onto the previous
+---command-line text), otherwise falls back to vim.ui.select. `on_choice` is
+---called only when a choice is made; aborting does nothing.
+---@param items string[]
+---@param prompt string
+---@param on_choice fun(choice: string)
+function M.select(items, prompt, on_choice)
+  local has_fzf, fzf = pcall(require, "fzf-lua")
+  if has_fzf then
+    fzf.fzf_exec(items, {
+      prompt = prompt .. "> ",
+      actions = {
+        ["default"] = function(selected)
+          local choice = selected and selected[1]
+          if choice then
+            on_choice(choice)
+          end
+        end,
+      },
+    })
+  else
+    vim.ui.select(items, { prompt = prompt }, function(choice)
+      if choice then
+        on_choice(choice)
+      end
+    end)
+  end
+end
+
 ---Pick a note from a folder, then invoke on_choice with { name, path }.
 ---@param folder string
 ---@param prompt string

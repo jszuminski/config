@@ -3,6 +3,7 @@ local id_mod = require("zettel.id")
 local template = require("zettel.template")
 local frontmatter = require("zettel.frontmatter")
 local state = require("zettel.state")
+local pick = require("zettel.pick")
 
 local M = {}
 
@@ -59,9 +60,7 @@ local function prompt_fields(fields, done)
       step(i + 1)
     end
     if f.type == "select" and f.choices then
-      vim.ui.select(f.choices, { prompt = f.prompt }, function(choice)
-        commit(choice or f.default)
-      end)
+      pick.select(f.choices, f.prompt, commit)
     else
       vim.ui.input({ prompt = f.prompt .. ": ", default = f.default or "" }, commit)
     end
