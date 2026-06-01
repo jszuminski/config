@@ -11,6 +11,7 @@ return {
       { "<leader>b", group = "buffer" },
       { "<leader>r", group = "rename" },
       { "<leader>u", group = "ui toggle" },
+      { "<leader>o", group = "obsidian" },
     },
   },
 }

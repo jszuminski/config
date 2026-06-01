@@ -24,7 +24,7 @@ return {
     sources = {
       default = { "lsp", "path", "snippets", "buffer" },
       per_filetype = {
-        markdown = { "path", "snippets" },
+        markdown = { "lsp", "path", "snippets" },
         text = { "path" },
         gitcommit = { "path" },
       },
