@@ -83,15 +83,12 @@ return {
         end,
       })
 
-      local lspconfig = require("lspconfig")
+      -- Neovim 0.11 native LSP API (vim.lsp.config/enable) instead of the
+      -- deprecated require("lspconfig").<server>.setup() framework.
+      -- Apply blink capabilities to every server via the "*" default.
+      vim.lsp.config("*", { capabilities = capabilities })
 
-      local simple_servers = { "ts_ls", "eslint", "jsonls", "html", "cssls", "tailwindcss", "astro" }
-      for _, name in ipairs(simple_servers) do
-        lspconfig[name].setup({ capabilities = capabilities })
-      end
-
-      lspconfig.lua_ls.setup({
-        capabilities = capabilities,
+      vim.lsp.config("lua_ls", {
         settings = {
           Lua = {
             workspace = { checkThirdParty = false },
@@ -102,8 +99,7 @@ return {
         },
       })
 
-      lspconfig.basedpyright.setup({
-        capabilities = capabilities,
+      vim.lsp.config("basedpyright", {
         settings = {
           basedpyright = {
             analysis = {
@@ -115,15 +111,13 @@ return {
         },
       })
 
-      lspconfig.ruff.setup({
-        capabilities = capabilities,
+      vim.lsp.config("ruff", {
         init_options = {
           settings = { lineLength = 100 },
         },
       })
 
-      lspconfig.rust_analyzer.setup({
-        capabilities = capabilities,
+      vim.lsp.config("rust_analyzer", {
         settings = {
           ["rust-analyzer"] = {
             cargo = { allFeatures = true },
@@ -136,6 +130,11 @@ return {
             },
           },
         },
+      })
+
+      vim.lsp.enable({
+        "ts_ls", "eslint", "jsonls", "html", "cssls", "tailwindcss", "astro",
+        "lua_ls", "basedpyright", "ruff", "rust_analyzer",
       })
     end,
   },
