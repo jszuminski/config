@@ -28,6 +28,15 @@ return {
     },
     format_on_save = function(bufnr)
       if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then return end
+      -- JS/TS family excluded from format-on-save for now. Manual formatting
+      -- via <leader>cf still works for these.
+      local no_autoformat = {
+        javascript = true,
+        javascriptreact = true,
+        typescript = true,
+        typescriptreact = true,
+      }
+      if no_autoformat[vim.bo[bufnr].filetype] then return end
       return { timeout_ms = 1000, lsp_format = "fallback" }
     end,
   },
