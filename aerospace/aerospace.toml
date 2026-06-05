@@ -37,6 +37,18 @@ on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
 # Also see: https://nikitabobko.github.io/AeroSpace/goodies#disable-hide-app
 automatically-unhide-macos-hidden-apps = false
 
+# Keep the Wispr Flow dictation bar visible on every workspace. AeroSpace has no
+# sticky windows (https://github.com/nikitabobko/AeroSpace/issues/2), so instead
+# we float the bar and drag it onto whichever workspace becomes active.
+exec-on-workspace-change = ['/bin/bash', '-c',
+  'wid=$(aerospace list-windows --all --format "%{window-id}|%{app-bundle-id}" | grep "com.electron.wispr-flow" | head -1 | cut -d"|" -f1); [ -n "$wid" ] && aerospace move-node-to-workspace --window-id "$wid" "$AEROSPACE_FOCUSED_WORKSPACE"'
+]
+
+# Don't tile the Wispr Flow dictation bar.
+[[on-window-detected]]
+if.app-id = 'com.electron.wispr-flow'
+run = 'layout floating'
+
 # Possible values: (qwerty|dvorak|colemak)
 # See https://nikitabobko.github.io/AeroSpace/guide#key-mapping
 [key-mapping]
