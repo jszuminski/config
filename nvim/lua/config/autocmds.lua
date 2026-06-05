@@ -46,15 +46,18 @@ vim.api.nvim_create_autocmd("FileChangedShellPost", {
 
 -- Soft-wrap prose filetypes. Uses BufWinEnter as well as FileType because
 -- wrap/linebreak/breakindent are window-local: FileType alone only sets them
--- on first load, so a split or re-displayed already-loaded buffer would keep
--- the global `nowrap`. BufWinEnter fires per window, closing that gap.
-local wrap_filetypes = { "markdown", "text", "gitcommit", "mail" }
+-- on first load, so a re-displayed already-loaded buffer (e.g. returning to a
+-- file after renaming it in oil) would keep the global `nowrap`. BufWinEnter
+-- fires per window, closing that gap.
+--
+-- NOTE: no `pattern` here. For BufWinEnter the pattern matches the file *name*,
+-- not the filetype, so a filetype pattern would silently disable that half.
+-- We let both events fire for everything and gate on the filetype inside.
+local wrap_filetypes = { markdown = true, text = true, gitcommit = true, mail = true }
 vim.api.nvim_create_autocmd({ "FileType", "BufWinEnter" }, {
   group = aug,
-  pattern = wrap_filetypes,
   callback = function()
-    -- BufWinEnter ignores the filetype pattern, so re-check the buffer's ft.
-    if not vim.tbl_contains(wrap_filetypes, vim.bo.filetype) then
+    if not wrap_filetypes[vim.bo.filetype] then
       return
     end
     vim.opt_local.wrap = true
