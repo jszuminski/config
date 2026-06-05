@@ -49,6 +49,15 @@ exec-on-workspace-change = ['/bin/bash', '-c',
 if.app-id = 'com.electron.wispr-flow'
 run = 'layout floating'
 
+# Default workspaces: Obsidian -> O, WezTerm -> T.
+[[on-window-detected]]
+if.app-id = 'md.obsidian'
+run = 'move-node-to-workspace O'
+
+[[on-window-detected]]
+if.app-id = 'com.github.wez.wezterm'
+run = 'move-node-to-workspace T'
+
 # Possible values: (qwerty|dvorak|colemak)
 # See https://nikitabobko.github.io/AeroSpace/guide#key-mapping
 [key-mapping]
