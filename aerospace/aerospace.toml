@@ -108,10 +108,12 @@ run = 'layout floating'
     alt-comma = 'layout accordion horizontal vertical'
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#focus
-    alt-h = 'focus left'
-    alt-j = 'focus down'
-    alt-k = 'focus up'
-    alt-l = 'focus right'
+    # --ignore-floating skips floating windows (e.g. the Wispr Flow bar) so
+    # focus moves between tiled windows instead of landing on the mic icon.
+    alt-h = 'focus --ignore-floating left'
+    alt-j = 'focus --ignore-floating down'
+    alt-k = 'focus --ignore-floating up'
+    alt-l = 'focus --ignore-floating right'
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#move
     alt-shift-h = 'move left'
