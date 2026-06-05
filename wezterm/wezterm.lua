@@ -69,6 +69,17 @@ config.keys = {
 		mods = "CMD",
 		action = wezterm.action.PasteFrom("Clipboard"),
 	},
+	-- Cmd+K: clear screen AND tmux scrollback. Sends the tmux prefix (C-Space)
+	-- then C-l, which our tmux binding turns into `send-keys C-l ; clear-history`.
+	-- (Ctrl+K/Ctrl+L can't be used: tmux binds them to pane navigation.)
+	{
+		key = "k",
+		mods = "CMD",
+		action = wezterm.action.Multiple({
+			wezterm.action.SendKey({ key = "Space", mods = "CTRL" }),
+			wezterm.action.SendKey({ key = "l", mods = "CTRL" }),
+		}),
+	},
 }
 
 for _, k in ipairs(command_keys) do
