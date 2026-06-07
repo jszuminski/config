@@ -16,6 +16,9 @@ tmux/~/
 !aerospace/
 !aerospace/**
 
+!git/
+!git/config
+
 !readme.md
 !.gitignore
 !keychron_keymap.json

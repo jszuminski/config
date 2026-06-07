@@ -1,0 +1,7 @@
+[user]
+	name = jszuminski
+	email = jszuminski@pm.me
+[init]
+	defaultBranch = main
+[push]
+	autoSetupRemote = true
