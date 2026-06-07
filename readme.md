@@ -38,6 +38,10 @@ alias cr="cargo run"
 alias cc="cargo check"
 ```
 
+## other vim improvements
+
+- bind Caps Lock to Esc on MacOS (System Settings -> Keyboard -> Keyboard Shortcuts -> Modifier Keys -> Caps Lock, rebind to Escape)
+
 ## cheatsheets
 
 - [tmux](https://tmuxcheatsheet.com/)
