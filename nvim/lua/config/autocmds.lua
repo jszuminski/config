@@ -53,6 +53,27 @@ vim.api.nvim_create_autocmd("FileChangedShellPost", {
 -- NOTE: no `pattern` here. For BufWinEnter the pattern matches the file *name*,
 -- not the filetype, so a filetype pattern would silently disable that half.
 -- We let both events fire for everything and gate on the filetype inside.
+-- Keep the sign column background transparent regardless of theme, so it
+-- doesn't show as a grey strip next to the line numbers.
+local function apply_hl_overrides()
+  vim.api.nvim_set_hl(0, "SignColumn",  { bg = "NONE" })
+  vim.api.nvim_set_hl(0, "CursorLine", { underline = false })
+  -- Neutral dark popup colors so themes with garish Pmenu defaults (e.g.
+  -- ansi_blows magenta) don't make completion menus unreadable.
+  vim.api.nvim_set_hl(0, "Pmenu",        { bg = "#1c1c1c", fg = "#d0d0d0" })
+  vim.api.nvim_set_hl(0, "PmenuSel",     { bg = "#3a3a3a", fg = "#ffffff", bold = true })
+  vim.api.nvim_set_hl(0, "PmenuSbar",    { bg = "#2a2a2a" })
+  vim.api.nvim_set_hl(0, "PmenuThumb",   { bg = "#606060" })
+  vim.api.nvim_set_hl(0, "NormalFloat",  { bg = "#1c1c1c", fg = "#d0d0d0" })
+  vim.api.nvim_set_hl(0, "FloatBorder",  { bg = "#1c1c1c", fg = "#555555" })
+end
+
+vim.api.nvim_create_autocmd("ColorScheme", {
+  group = aug,
+  callback = apply_hl_overrides,
+})
+apply_hl_overrides() -- apply on first load too
+
 local wrap_filetypes = { markdown = true, text = true, gitcommit = true, mail = true }
 vim.api.nvim_create_autocmd({ "FileType", "BufWinEnter" }, {
   group = aug,
