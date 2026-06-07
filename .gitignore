@@ -3,8 +3,6 @@ nvim/.env
 
 !nvim/
 !nvim/**
-!nvim*/
-!nvim*/**
 
 !tmux/
 !tmux/**
@@ -24,8 +22,3 @@ tmux/~/
 !keychron_keymap.json
 
 !claude-global-settings.json
-
-!zed/
-!zed/**
-zed/conversations/
-zed/prompts/
