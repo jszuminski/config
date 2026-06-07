@@ -7,19 +7,21 @@ return {
   {
     "echasnovski/mini.surround",
     keys = {
-      { "sa", desc = "Add surrounding", mode = { "n", "v" } },
-      { "sd", desc = "Delete surrounding" },
-      { "sr", desc = "Replace surrounding" },
+      { "gsa", desc = "Add surrounding", mode = { "n", "v" } },
+      { "gsd", desc = "Delete surrounding" },
+      { "gsr", desc = "Replace surrounding" },
     },
     opts = {
+      -- Prefixed with `gs` (not `s`) so bare `s` keeps its built-in
+      -- substitute-char behavior. `gs` only shadows the obscure sleep command.
       mappings = {
-        add = "sa",
-        delete = "sd",
-        find = "sf",
-        find_left = "sF",
-        highlight = "sh",
-        replace = "sr",
-        update_n_lines = "sn",
+        add = "gsa",
+        delete = "gsd",
+        find = "gsf",
+        find_left = "gsF",
+        highlight = "gsh",
+        replace = "gsr",
+        update_n_lines = "gsn",
       },
     },
   },
