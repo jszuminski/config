@@ -2,15 +2,6 @@ return {
   "obsidian-nvim/obsidian.nvim",
   version = "*",
   ft = "markdown",
-  -- Obsidian's UI rendering (concealed [[links]], checkboxes) needs conceallevel >= 1.
-  init = function()
-    vim.api.nvim_create_autocmd("FileType", {
-      pattern = "markdown",
-      callback = function()
-        vim.wo.conceallevel = 2
-      end,
-    })
-  end,
   -- opts is a function so `require("obsidian.builtin")` resolves only after
   -- the plugin is on the runtimepath (avoids a load-order error at startup).
   opts = function()
@@ -38,6 +29,7 @@ return {
         create_new = true,
       },
 
+      ui = { enable = false },
       picker = { name = "fzf-lua" },
       templates = { folder = "_templates" },
       attachments = { folder = "_attachments" },
