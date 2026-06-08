@@ -23,18 +23,9 @@ return {
       ["neo-tree"] = true,
     }
 
-    -- Filetypes where only vertical (C-j/C-k) is blocked; left/right still
-    -- navigate panes (oil doesn't bind C-h/C-l so they're free to roam).
-    local block_vertical = {
-      oil = true,
-    }
-
     local function nav(direction)
-      local is_vertical = direction == "Down" or direction == "Up"
       return function()
-        local ft = vim.bo.filetype
-        if block_all[ft] then return end
-        if is_vertical and block_vertical[ft] then return end
+        if block_all[vim.bo.filetype] then return end
         vim.cmd("TmuxNavigate" .. direction)
       end
     end
@@ -49,20 +40,6 @@ return {
     map("i", "<C-j>", "<Esc><Cmd>TmuxNavigateDown<CR>",  { silent = true, desc = "Tmux down" })
     map("i", "<C-k>", "<Esc><Cmd>TmuxNavigateUp<CR>",    { silent = true, desc = "Tmux up" })
     map("i", "<C-l>", "<Esc><Cmd>TmuxNavigateRight<CR>", { silent = true, desc = "Tmux right" })
-
-    -- Oil sets ["<C-h>"] = false and ["<C-l>"] = false which installs
-    -- buffer-local no-ops that shadow our global mappings. Reinstall the
-    -- horizontal navigators buffer-locally so left/right still work in oil.
-    vim.api.nvim_create_autocmd("FileType", {
-      pattern = "oil",
-      callback = function(ev)
-        local opts = { buffer = ev.buf, silent = true }
-        vim.keymap.set("n", "<C-h>", "<Cmd>TmuxNavigateLeft<CR>",  opts)
-        vim.keymap.set("n", "<C-l>", "<Cmd>TmuxNavigateRight<CR>", opts)
-        vim.keymap.set("i", "<C-h>", "<Esc><Cmd>TmuxNavigateLeft<CR>",  opts)
-        vim.keymap.set("i", "<C-l>", "<Esc><Cmd>TmuxNavigateRight<CR>", opts)
-      end,
-    })
 
     -- Terminal mode mappings deliberately omitted: fzf-lua, lazygit, htop
     -- and other TUI programs running in :term need C-hjkl for their own

@@ -22,8 +22,6 @@ return {
       ["g?"] = "actions.show_help",
       ["<CR>"] = "actions.select",
       ["<C-s>"] = { "actions.select", opts = { vertical = true } },
-      ["<C-h>"] = false,
-      ["<C-l>"] = false,
       ["<C-p>"] = "actions.preview",
       ["<C-c>"] = "actions.close",
       ["<C-r>"] = "actions.refresh",
