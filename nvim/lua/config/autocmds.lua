@@ -74,7 +74,7 @@ vim.api.nvim_create_autocmd("ColorScheme", {
 })
 apply_hl_overrides() -- apply on first load too
 
-local wrap_filetypes = { markdown = true, text = true, gitcommit = true, mail = true }
+local wrap_filetypes = { markdown = true, text = true, gitcommit = true, mail = true, svelte = true }
 vim.api.nvim_create_autocmd({ "FileType", "BufWinEnter" }, {
   group = aug,
   callback = function()
