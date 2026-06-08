@@ -57,3 +57,5 @@ alias cc="cargo check"
 - [ ] fix claude code not overriding current buffer
 - [ ] add makefile which would refresh each and every one piece of config
 - [ ] add zshrc common config
+
+- [ ] !!! (security & reliability) use only fixed versions of the plugins and not latest versions '\*'; update bi-weekly manually/with claude
