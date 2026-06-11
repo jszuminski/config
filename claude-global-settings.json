@@ -147,10 +147,14 @@
       }
     ]
   },
-  "skipDangerousModePermissionPrompt": true,
-  "effortLevel": "high",
   "statusLine": {
     "type": "command",
     "command": "~/.claude/statusline.sh"
-  }
+  },
+  "enabledPlugins": {
+    "posthog@claude-plugins-official": true
+  },
+  "effortLevel": "high",
+  "skipDangerousModePermissionPrompt": true,
+  "model": "claude-fable-5[1m]"
 }
