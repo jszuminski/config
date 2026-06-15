@@ -20,5 +20,3 @@ tmux/~/
 !readme.md
 !.gitignore
 !keychron_keymap.json
-
-claude-global-settings.json
