@@ -29,6 +29,7 @@ return {
         "css-lsp",
         "tailwindcss-language-server",
         "astro-language-server",
+        "svelte-language-server",
         "basedpyright",
         "ruff",
         "rust-analyzer",
@@ -133,7 +134,7 @@ return {
       })
 
       vim.lsp.enable({
-        "ts_ls", "eslint", "jsonls", "html", "cssls", "tailwindcss", "astro",
+        "ts_ls", "eslint", "jsonls", "html", "cssls", "tailwindcss", "astro", "svelte",
         "lua_ls", "basedpyright", "ruff", "rust_analyzer",
       })
     end,
