@@ -51,7 +51,11 @@ return {
       local capabilities = require("blink.cmp").get_lsp_capabilities()
 
       vim.diagnostic.config({
-        virtual_text = { prefix = "●", spacing = 2 },
+        -- Compact dot inline on every line except the current one...
+        virtual_text = { prefix = "●", spacing = 2, current_line = false },
+        -- ...where the full diagnostic renders below the line as wrapped
+        -- virtual lines, so long errors are readable in a narrow window.
+        virtual_lines = { current_line = true },
         signs = {
           text = {
             [vim.diagnostic.severity.ERROR] = " ",
@@ -63,7 +67,7 @@ return {
         underline = true,
         update_in_insert = false,
         severity_sort = true,
-        float = { border = "rounded", source = true },
+        float = { border = "rounded", source = true, wrap = true, max_width = 80 },
       })
 
       vim.api.nvim_create_autocmd("LspAttach", {
