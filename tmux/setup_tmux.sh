@@ -11,7 +11,7 @@ echo "🚀 Starting TMUX Plugin Manager (TPM) setup..."
 # 1. Clone TPM if it doesn't exist
 if [ ! -d "$TPM_DIR" ]; then
   echo "📁 cloning TPM into $TPM_DIR..."
-  git clone https://github.com/tmux-plugins/tpm "$TPM_DIR"
+  git clone -b v3.1.0 https://github.com/tmux-plugins/tpm "$TPM_DIR"
 else
   echo "✅ TPM is already installed at $TPM_DIR"
 fi

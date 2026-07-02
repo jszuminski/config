@@ -45,17 +45,45 @@ config.harfbuzz_features = { "calt = 0", "clig = 0", "liga = 0" }
 -- as NVIM and TMUX and others do not support Command
 local command_keys = { "c", "p", "g", "u", "l", "Enter" }
 
--- @TODO: send those strings only when in NVIM selected pane
+-- Cmd+S / Cmd+A send nvim keystrokes, so they must only fire when nvim is
+-- actually focused - otherwise Cmd+S types ":w" into a shell. The wezterm
+-- pane's foreground process is usually tmux, so for the tmux case we ask
+-- tmux what the active pane inside this client is running.
+local function is_nvim(pane)
+	local proc = (pane:get_foreground_process_name() or ""):match("[^/]+$") or ""
+	if proc:find("vim") then
+		return true
+	end
+	if proc:find("tmux") then
+		local ok, out = wezterm.run_child_process({
+			"/opt/homebrew/bin/tmux",
+			"display-message",
+			"-c", pane:get_tty_name() or "",
+			"-p", "#{pane_current_command}",
+		})
+		return ok and out:find("vim") ~= nil
+	end
+	return false
+end
+
+local function send_to_nvim_only(str)
+	return wezterm.action_callback(function(window, pane)
+		if is_nvim(pane) then
+			window:perform_action(wezterm.action.SendString(str), pane)
+		end
+	end)
+end
+
 config.keys = {
 	{
 		key = "s",
 		mods = "CMD",
-		action = wezterm.action.SendString(":w\n"),
+		action = send_to_nvim_only(":w\n"),
 	},
 	{
 		key = "a",
 		mods = "CMD",
-		action = wezterm.action.SendString("\x1bggVG"),
+		action = send_to_nvim_only("\x1bggVG"),
 	},
 	-- in order to be able to create a new line with Shift + Enter in Claude Code
 	{

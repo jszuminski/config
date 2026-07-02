@@ -2,41 +2,32 @@
 
 ```
 git clone https://github.com/jszuminski/config ~/.config
-
-npm i -g eslint_d prettier
 ```
+
+Formatters and language servers (prettierd, ruff, stylua, LSPs, ...) are
+installed automatically by Mason on first nvim launch - no npm/pipx
+installs needed.
 
 ## required symlinks
 
 ```bash
 ln -s ~/.config/wezterm/wezterm.lua ~/.wezterm.lua
-ln -s ~/.config/claude-global-settings ~/.claude/settings.json
+ln -s ~/.config/zsh/zshrc ~/.zshrc
+ln -s ~/.config/zsh/zprofile ~/.zprofile
+ln -s ~/.config/claude-global-settings.json ~/.claude/settings.json  # gitignored, machine-local
 ```
 
-## other deps
+## shell
 
-```
-brew install pipx
-pipx install black
-pipx install isort
-```
+Zsh config lives in `zsh/` (no oh-my-zsh; the git aliases are extracted
+into `zsh/git-aliases.zsh`). Aliases, prompt, and lazy-loaded nvm are all
+in `zsh/zshrc`.
 
-**note:** for personal projects use ruff
+## version pinning
 
-## helpful aliases
-
-```
-# Modern CLI replacements for speed (used by Claude Code)
-alias ls='eza'
-alias cat='bat'
-alias grep='rg'
-alias find='fd'
-alias diff='delta'
-
-# Useful for quick Rust development
-alias cr="cargo run"
-alias cc="cargo check"
-```
+- **nvim plugins:** pinned via `nvim/lazy-lock.json` (commit it after every `:Lazy update`)
+- **tmux plugins:** pinned to release tags in `tmux/tmux.conf` (`plugin#vX.Y.Z`)
+- **mason tools:** not pinned yet (mason-tool-installer supports `tool@version`)
 
 ## other vim improvements
 
@@ -51,11 +42,11 @@ alias cc="cargo check"
 
 ## to-do's
 
-- [ ] create a script which would set everything up (symlinks, tmux, etc.)
+- [ ] create a setup script + Brewfile which would set everything up (brew deps, symlinks, tmux, caps-lock remap)
 - [ ] unify personal/work nvim + tmux configurations
-- [x] allow copying from tmux selection mode (`y` in copy mode now pipes to pbcopy)
 - [ ] fix claude code not overriding current buffer
-- [ ] add makefile which would refresh each and every one piece of config
-- [ ] add zshrc common config
-
-- [ ] !!! (security & reliability) use only fixed versions of the plugins and not latest versions '\*'; update bi-weekly manually/with claude
+- [ ] pin mason tool versions
+- [ ] trim unused aerospace alt-letter workspace bindings
+- [x] add zshrc common config
+- [x] allow copying from tmux selection mode (`y` in copy mode now pipes to pbcopy)
+- [x] use fixed versions of plugins (lazy-lock.json for nvim, `#tag` pins for tmux)

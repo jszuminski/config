@@ -1,0 +1,4 @@
+# Global gitignore (core.excludesFile) - machine noise only.
+# Project-specific ignores belong in each repo's .gitignore.
+.DS_Store
+**/.claude/settings.local.json

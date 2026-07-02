@@ -1,0 +1,30 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: shellcheck
+        run: shellcheck tmux/setup_tmux.sh tmux/tmux-sessionizer
+
+      - name: lua syntax (nvim + wezterm)
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq luajit
+          git ls-files '*.lua' | while read -r f; do
+            luajit -e "assert(loadfile('$f'))" || exit 1
+          done
+
+      - name: zsh syntax
+        run: |
+          sudo apt-get install -y -qq zsh
+          for f in zsh/zshrc zsh/zprofile zsh/git-aliases.zsh; do
+            zsh -n "$f" || exit 1
+          done

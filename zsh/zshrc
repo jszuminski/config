@@ -1,0 +1,156 @@
+# ~/.zshrc - lean, no-oh-my-zsh setup. Optimized for fast startup.
+
+# You may need to manually set your language environment
+export LANG=en_US.UTF-8
+
+# ---------------------------------------------------------------------------
+# Completion system (replaces oh-my-zsh's compinit)
+# Cache the dump; only run the full rebuild + security audit once every 24h.
+# ---------------------------------------------------------------------------
+autoload -Uz compinit
+if [[ -n ${HOME}/.zcompdump(#qN.mh+24) ]]; then
+  compinit -d "${HOME}/.zcompdump"        # stale (>24h) -> full rebuild
+else
+  compinit -C -d "${HOME}/.zcompdump"     # fresh -> skip checks, use cache
+fi
+
+# Sensible completion behavior (case-insensitive, menu select, colored)
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
+zstyle ':completion:*' menu select
+zstyle ':completion:*' list-colors ''
+
+# Colors for the prompt ($fg / $fg_bold / $reset_color)
+autoload -U colors && colors
+setopt PROMPT_SUBST                        # allow $(git_prompt_info) in PROMPT
+
+# ---------------------------------------------------------------------------
+# History (sensible defaults that oh-my-zsh used to provide)
+# ---------------------------------------------------------------------------
+HISTFILE=~/.zsh_history
+HISTSIZE=50000
+SAVEHIST=50000
+setopt SHARE_HISTORY HIST_IGNORE_DUPS HIST_IGNORE_SPACE HIST_REDUCE_BLANKS \
+       INC_APPEND_HISTORY EXTENDED_HISTORY
+
+# Directory navigation niceties
+setopt AUTO_CD AUTO_PUSHD PUSHD_IGNORE_DUPS
+
+# ---------------------------------------------------------------------------
+# Git info for the prompt (replaces oh-my-zsh git plugin's git_prompt_info)
+# ---------------------------------------------------------------------------
+git_prompt_info() {
+  local ref
+  ref=$(command git symbolic-ref --short HEAD 2>/dev/null) || \
+  ref=$(command git rev-parse --short HEAD 2>/dev/null) || return 0
+  local state
+  if [[ -n $(command git status --porcelain 2>/dev/null) ]]; then
+    state=$ZSH_THEME_GIT_PROMPT_DIRTY
+  else
+    state=$ZSH_THEME_GIT_PROMPT_CLEAN
+  fi
+  echo "${ZSH_THEME_GIT_PROMPT_PREFIX}${ref}${state}${ZSH_THEME_GIT_PROMPT_SUFFIX}"
+}
+
+# ---------------------------------------------------------------------------
+# oh-my-zsh git plugin aliases (gst, gco, gp, gd, gcm, ...) without the
+# oh-my-zsh framework. The plugin only needs these two helpers from omz's
+# lib/git.zsh; everything else it defines itself.
+# ---------------------------------------------------------------------------
+__git_prompt_git() { GIT_OPTIONAL_LOCKS=0 command git "$@" }
+git_current_branch() {
+  local ref
+  ref=$(__git_prompt_git symbolic-ref --quiet HEAD 2>/dev/null)
+  local ret=$?
+  if [[ $ret != 0 ]]; then
+    [[ $ret == 128 ]] && return                                   # not a git repo
+    ref=$(__git_prompt_git rev-parse --short HEAD 2>/dev/null) || return
+  fi
+  echo ${ref#refs/heads/}
+}
+[ -r ~/.config/zsh/git-aliases.zsh ] && source ~/.config/zsh/git-aliases.zsh
+
+# ---------------------------------------------------------------------------
+# Editors
+# ---------------------------------------------------------------------------
+export EDITOR='nvim'
+export VISUAL='nvim'
+export GOLFVIM='nvim' # play vimgolf challenges with neovim
+
+export WORK_GITHUB_ACCOUNT_USERNAME='jszuminski'
+export TMUX_PLUGIN_MANAGER_PATH="$HOME/.tmux/plugins" # $HOME, not '~': tilde never expands in quotes
+
+# ---------------------------------------------------------------------------
+# nvm (lazy-loaded: only initializes on first use of node/npm/npx/nvm).
+# Saves ~300ms of startup since nvm.sh runs a full version check on every launch.
+# ---------------------------------------------------------------------------
+export NVM_DIR="$HOME/.nvm"
+_load_nvm() {
+  unset -f nvm node npm npx 2>/dev/null
+  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"                       # This loads nvm
+  [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"    # This loads nvm bash_completion
+}
+for _cmd in nvm node npm npx; do
+  eval "${_cmd}() { _load_nvm; ${_cmd} \"\$@\"; }"
+done
+unset _cmd
+
+# ---------------------------------------------------------------------------
+# PATH
+# ---------------------------------------------------------------------------
+export PATH="/opt/homebrew/opt/postgresql@16/bin:$PATH"
+export PATH="$HOME/.cargo/bin:$PATH" # Rust
+export PATH="$HOME/.local/bin:$PATH"
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+export PATH="$HOME/.grok/bin:$PATH" # grok installer
+
+# ---------------------------------------------------------------------------
+# Aliases
+# ---------------------------------------------------------------------------
+alias cr="cargo run"
+alias cc="cargo check"
+
+# Modern CLI replacements for speed (used by Claude Code)
+alias ls='eza'
+alias cat='bat'
+alias grep='rg'
+alias diff='delta'
+
+# For super fast claude
+alias cld='claude --dangerously-skip-permissions'
+unalias cldw 2>/dev/null
+cldw() { claude --dangerously-skip-permissions --worktree="$1" "${@:2}"; }
+unalias cldwt 2>/dev/null
+cldwt() { claude --dangerously-skip-permissions --tmux --worktree="$1" "${@:2}"; }
+alias cldr='claude --dangerously-skip-permissions --resume'
+alias cdcode='cd ~/Documents/coding/'
+alias cdmog='cd ~/Documents/coding/mog-monorepo'
+alias cdcvim='cd ~/Documents/coding/crackedvim'
+alias cdjsafe='cd ~/Documents/jsafe'
+
+# ---------------------------------------------------------------------------
+# Key bindings: edit current command line in nvim with Ctrl+G
+# ---------------------------------------------------------------------------
+autoload -U edit-command-line
+zle -N edit-command-line
+bindkey '^G' edit-command-line
+
+# bun completions
+[ -s "/Users/jakubszuminski/.bun/_bun" ] && source "/Users/jakubszuminski/.bun/_bun"
+
+# ---------------------------------------------------------------------------
+# Prompt: green hacker style. %c = current dir, git info appended.
+# ---------------------------------------------------------------------------
+PROMPT='%(?:%{$fg_bold[green]%}❯%{$reset_color%} :%{$fg_bold[red]%}❯%{$reset_color%} )%{$fg_bold[green]%}%c%{$reset_color%} $(git_prompt_info)'
+ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg[green]%}git:(%{$fg_bold[green]%}"
+ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%} "
+ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg[green]%}) %{$fg[yellow]%}✗"
+ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg[green]%})"
+
+# ---------------------------------------------------------------------------
+# Plugins (sourced directly from Homebrew - no oh-my-zsh framework).
+# zsh-syntax-highlighting MUST be sourced last.
+# ---------------------------------------------------------------------------
+source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+export ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR=/opt/homebrew/share/zsh-syntax-highlighting/highlighters
+source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh

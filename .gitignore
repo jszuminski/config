@@ -15,6 +15,13 @@ nvim/.env
 
 !git/
 !git/config
+!git/ignore
+
+!zsh/
+!zsh/**
+
+!.github/
+!.github/**
 
 !readme.md
 !.gitignore

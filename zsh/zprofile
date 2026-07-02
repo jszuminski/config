@@ -1,0 +1,11 @@
+# Homebrew env, inlined statically to avoid forking `brew shellenv` on every
+# new (login) terminal (~20ms each). Equivalent to: eval "$(brew shellenv)".
+export HOMEBREW_PREFIX="/opt/homebrew"
+export HOMEBREW_CELLAR="/opt/homebrew/Cellar"
+export HOMEBREW_REPOSITORY="/opt/homebrew"
+export PATH="/opt/homebrew/bin:/opt/homebrew/sbin:$PATH"
+export INFOPATH="/opt/homebrew/share/info:${INFOPATH:-}"
+fpath=(/opt/homebrew/share/zsh/site-functions $fpath)
+
+# Added by Obsidian
+export PATH="$PATH:/Applications/Obsidian.app/Contents/MacOS"
