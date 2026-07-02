@@ -19,9 +19,11 @@ return {
       indent = { enable = true },
       incremental_selection = {
         enable = true,
+        -- <CR>/<BS>: <C-Space> is the tmux prefix, so tmux swallows it
+        -- before nvim ever sees the key and the binding is unreachable.
         keymaps = {
-          init_selection = "<C-Space>",
-          node_incremental = "<C-Space>",
+          init_selection = "<CR>",
+          node_incremental = "<CR>",
           scope_incremental = false,
           node_decremental = "<BS>",
         },

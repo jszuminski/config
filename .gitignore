@@ -6,7 +6,6 @@ nvim/.env
 
 !tmux/
 !tmux/**
-tmux/~/
 
 !wezterm/
 !wezterm/**

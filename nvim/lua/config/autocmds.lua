@@ -5,9 +5,14 @@ vim.api.nvim_create_autocmd("TextYankPost", {
   callback = function() vim.highlight.on_yank({ timeout = 150 }) end,
 })
 
+-- Strip trailing whitespace on save, except where it is meaningful:
+-- markdown (two trailing spaces = hard line break), mail ("-- " signature
+-- separator), and diff/patch files (context lines start with a space).
+local keep_trailing_ws = { markdown = true, mail = true, diff = true, git = true }
 vim.api.nvim_create_autocmd("BufWritePre", {
   group = aug,
-  callback = function()
+  callback = function(ev)
+    if keep_trailing_ws[vim.bo[ev.buf].filetype] then return end
     local save = vim.fn.winsaveview()
     vim.cmd([[%s/\s\+$//e]])
     vim.fn.winrestview(save)

@@ -53,7 +53,7 @@ alias cc="cargo check"
 
 - [ ] create a script which would set everything up (symlinks, tmux, etc.)
 - [ ] unify personal/work nvim + tmux configurations
-- [ ] allow copying from tmux selection mode with cmd+c
+- [x] allow copying from tmux selection mode (`y` in copy mode now pipes to pbcopy)
 - [ ] fix claude code not overriding current buffer
 - [ ] add makefile which would refresh each and every one piece of config
 - [ ] add zshrc common config
