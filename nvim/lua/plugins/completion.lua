@@ -25,9 +25,13 @@ return {
     sources = {
       default = { "lsp", "path", "snippets", "buffer" },
       per_filetype = {
+        lua = { "lazydev", "lsp", "path", "snippets", "buffer" },
         markdown = { "lsp", "path", "snippets" },
         text = { "path" },
         gitcommit = { "path" },
+      },
+      providers = {
+        lazydev = { name = "LazyDev", module = "lazydev.integrations.blink", score_offset = 100 },
       },
     },
     signature = { enabled = true, window = { border = "rounded" } },
