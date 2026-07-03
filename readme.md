@@ -27,7 +27,7 @@ in `zsh/zshrc`.
 
 - **nvim plugins:** pinned via `nvim/lazy-lock.json` (commit it after every `:Lazy update`)
 - **tmux plugins:** pinned to release tags in `tmux/tmux.conf` (`plugin#vX.Y.Z`)
-- **mason tools:** not pinned yet (mason-tool-installer supports `tool@version`)
+- **mason tools:** pinned via `tool@version` in `nvim/lua/plugins/lsp.lua`
 
 ## other vim improvements
 
@@ -45,8 +45,4 @@ in `zsh/zshrc`.
 - [ ] create a setup script + Brewfile which would set everything up (brew deps, symlinks, tmux, caps-lock remap)
 - [ ] unify personal/work nvim + tmux configurations
 - [ ] fix claude code not overriding current buffer
-- [ ] pin mason tool versions
-- [ ] trim unused aerospace alt-letter workspace bindings
-- [x] add zshrc common config
-- [x] allow copying from tmux selection mode (`y` in copy mode now pipes to pbcopy)
-- [x] use fixed versions of plugins (lazy-lock.json for nvim, `#tag` pins for tmux)
+- [x] pin mason tool versions

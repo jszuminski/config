@@ -1,7 +1,8 @@
 return {
   "saghen/blink.cmp",
   event = "InsertEnter",
-  version = "*",
+  -- stay on 1.x releases; a 2.0 should be a deliberate migration
+  version = "1.*",
   opts = {
     keymap = { preset = "default" },
     appearance = {
