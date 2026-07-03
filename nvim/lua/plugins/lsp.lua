@@ -78,6 +78,16 @@ return {
           local map = function(mode, lhs, rhs, desc)
             vim.keymap.set(mode, lhs, rhs, { buffer = args.buf, desc = desc, silent = true })
           end
+
+          -- Render inlay hints (the rust-analyzer settings below configure
+          -- WHAT to show; without this enable nothing is displayed at all).
+          local client = vim.lsp.get_client_by_id(args.data.client_id)
+          if client and client:supports_method("textDocument/inlayHint") then
+            vim.lsp.inlay_hint.enable(true, { bufnr = args.buf })
+          end
+          map("n", "<leader>uh", function()
+            vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = 0 }), { bufnr = 0 })
+          end, "Toggle inlay hints")
           map("n", "gd", function() require("fzf-lua").lsp_definitions() end, "Go to definition")
           map("n", "gD", vim.lsp.buf.declaration, "Go to declaration")
           map("n", "gr", function() require("fzf-lua").lsp_references() end, "References")
