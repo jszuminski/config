@@ -28,3 +28,36 @@ jobs:
           for f in zsh/zshrc zsh/zprofile zsh/git-aliases.zsh; do
             zsh -n "$f" || exit 1
           done
+
+  nvim-boot:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: install neovim (pinned to the version used locally)
+        run: |
+          curl -fsSL -o /tmp/nvim.tar.gz \
+            https://github.com/neovim/neovim/releases/download/v0.11.2/nvim-linux-x86_64.tar.gz
+          sudo tar -C /opt -xzf /tmp/nvim.tar.gz
+          echo "/opt/nvim-linux-x86_64/bin" >> "$GITHUB_PATH"
+
+      - name: cache plugins
+        uses: actions/cache@v4
+        with:
+          path: ~/.local/share/nvim
+          key: lazy-${{ hashFiles('nvim/lazy-lock.json') }}
+
+      - name: link config
+        run: mkdir -p ~/.config && ln -sfn "$GITHUB_WORKSPACE/nvim" ~/.config/nvim
+
+      - name: restore plugins at locked versions
+        run: nvim --headless "+Lazy! restore" +qa
+
+      - name: boot check
+        run: |
+          out=$(nvim --headless "+lua vim.defer_fn(function() vim.cmd('qa!') end, 10000)" 2>&1) || {
+            echo "$out"; exit 1; }
+          echo "$out"
+          if echo "$out" | grep -qiE 'error|E[0-9]{3,}'; then
+            echo "::error::nvim boot produced errors"; exit 1
+          fi

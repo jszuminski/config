@@ -38,7 +38,8 @@ return {
         "stylua@v0.20.0",
         "prettierd@0.27.0",
       },
-      run_on_start = true,
+      -- skip in CI: the boot test doesn't need 14 tool downloads
+      run_on_start = not vim.env.CI,
     },
   },
   {
