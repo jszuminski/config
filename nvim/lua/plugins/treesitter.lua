@@ -1,5 +1,9 @@
 return {
   "nvim-treesitter/nvim-treesitter",
+  -- master is frozen upstream but is the supported branch for nvim 0.11
+  -- (and is pinned via lazy-lock.json). The `main` rewrite requires nvim
+  -- 0.12 + tree-sitter-cli >= 0.26 and drops incremental_selection;
+  -- migrate deliberately once 0.12 is stable.
   branch = "master",
   build = ":TSUpdate",
   event = { "BufReadPost", "BufNewFile" },
