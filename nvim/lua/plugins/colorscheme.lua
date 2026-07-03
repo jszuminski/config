@@ -49,25 +49,28 @@ local function apply_matrix()
   end
 end
 
-return {
-  -- Both installed so switching is instant (just change ACTIVE above, restart).
-  { "iruzo/matrix-nvim",           lazy = false, priority = 1000 },
-  { "tpope/vim-vividchalk",        lazy = false, priority = 999  },
-  { "caglartoklu/borlandp.vim",    lazy = false, priority = 998  },
-  {
-    "vim-scripts/ansi_blows.vim",
-    lazy = false,
-    priority = 997,
-    -- config runs last; applies whichever theme is active.
-    config = function()
-      if ACTIVE == "matrix" then
-        apply_matrix()
-      elseif ACTIVE == "borlandp" then
-        vim.g.borlandp_bg = "dark_blue"
-        vim.cmd.colorscheme("borlandp")
-      else
-        vim.cmd.colorscheme(ACTIVE)
-      end
+local THEMES = {
+  matrix = { "iruzo/matrix-nvim", apply = apply_matrix },
+  vividchalk = { "tpope/vim-vividchalk", apply = function() vim.cmd.colorscheme("vividchalk") end },
+  borlandp = {
+    "caglartoklu/borlandp.vim",
+    apply = function()
+      vim.g.borlandp_bg = "dark_blue"
+      vim.cmd.colorscheme("borlandp")
     end,
   },
+  ansi_blows = { "vim-scripts/ansi_blows.vim", apply = function() vim.cmd.colorscheme("ansi_blows") end },
 }
+
+-- All themes stay installed so switching is instant (change ACTIVE, restart),
+-- but only the active one is loaded and applied at startup.
+local specs = {}
+for name, theme in pairs(THEMES) do
+  table.insert(specs, {
+    theme[1],
+    lazy = name ~= ACTIVE,
+    priority = 1000,
+    config = name == ACTIVE and function() theme.apply() end or nil,
+  })
+end
+return specs
