@@ -1,6 +1,8 @@
 return {
   "obsidian-nvim/obsidian.nvim",
-  version = "*",
+  -- stay on 3.x releases; this plugin touches the whole vault, so a major
+  -- bump should be a deliberate migration
+  version = "3.*",
   ft = "markdown",
   -- opts is a function so `require("obsidian.builtin")` resolves only after
   -- the plugin is on the runtimepath (avoids a load-order error at startup).
