@@ -24,7 +24,7 @@ return {
       -- To upgrade: bump the version here, then :MasonToolsUpdate.
       ensure_installed = {
         "lua-language-server@3.9.3",
-        "typescript-language-server@4.3.3",
+        "vtsls@0.2.6",
         "eslint-lsp@4.10.0",
         "json-lsp@4.10.0",
         "html-lsp@4.10.0",
@@ -151,7 +151,7 @@ return {
       })
 
       vim.lsp.enable({
-        "ts_ls", "eslint", "jsonls", "html", "cssls", "tailwindcss", "astro", "svelte",
+        "vtsls", "eslint", "jsonls", "html", "cssls", "tailwindcss", "astro", "svelte",
         "lua_ls", "basedpyright", "ruff", "rust_analyzer",
       })
     end,
