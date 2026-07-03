@@ -28,3 +28,11 @@ map("n", "<leader>uw", function() vim.wo.wrap = not vim.wo.wrap end, { desc = "T
 map("n", "]d", function() vim.diagnostic.jump({ count = 1, float = true }) end, { desc = "Next diagnostic" })
 map("n", "[d", function() vim.diagnostic.jump({ count = -1, float = true }) end, { desc = "Prev diagnostic" })
 map("n", "<leader>cd", vim.diagnostic.open_float, { desc = "Line diagnostics" })
+
+-- Quickfix: walk fzf-lua's ctrl-q results (and :make/:grep) without typing :cnext
+map("n", "]q", "<Cmd>cnext<CR>zz", { desc = "Next quickfix item" })
+map("n", "[q", "<Cmd>cprevious<CR>zz", { desc = "Prev quickfix item" })
+map("n", "<leader>xq", function()
+  local open = vim.iter(vim.fn.getwininfo()):any(function(w) return w.quickfix == 1 end)
+  vim.cmd(open and "cclose" or "copen")
+end, { desc = "Toggle quickfix window" })
