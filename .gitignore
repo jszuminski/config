@@ -26,3 +26,4 @@ nvim/.env
 !readme.md
 !.gitignore
 !keychron_keymap.json
+!AGENTS.md
