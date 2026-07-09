@@ -33,7 +33,11 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
-vim.api.nvim_create_autocmd({ "FocusGained", "BufEnter", "CursorHold", "CursorHoldI" }, {
+-- Reload buffers changed on disk. FocusGained covers the common case (tmux
+-- focus-events is on); BufEnter covers switching back to a buffer. CursorHold
+-- was dropped: with updatetime=200 it re-checked the file constantly for no
+-- extra benefit beyond focus/enter.
+vim.api.nvim_create_autocmd({ "FocusGained", "BufEnter" }, {
   group = aug,
   callback = function()
     if vim.fn.mode() ~= "c" and vim.api.nvim_get_mode().mode ~= "t" then

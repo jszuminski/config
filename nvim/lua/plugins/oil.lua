@@ -15,9 +15,8 @@ return {
         return name == ".." or name == ".DS_Store" or name == ".git"
       end,
     },
-    win_options = {
-      signcolumn = "yes:2",
-    },
+    -- No oil-git-status (or similar) is installed, so don't reserve two sign
+    -- columns for empty gutter space.
     keymaps = {
       ["g?"] = "actions.show_help",
       ["<CR>"] = "actions.select",
