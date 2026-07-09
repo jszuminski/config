@@ -74,12 +74,8 @@ return {
             vim.keymap.set(mode, lhs, rhs, { buffer = args.buf, desc = desc, silent = true })
           end
 
-          -- Render inlay hints (the rust-analyzer settings below configure
-          -- WHAT to show; without this enable nothing is displayed at all).
-          local client = vim.lsp.get_client_by_id(args.data.client_id)
-          if client and client:supports_method("textDocument/inlayHint") then
-            vim.lsp.inlay_hint.enable(true, { bufnr = args.buf })
-          end
+          -- Inlay hints stay off by default (cheap); toggle with <leader>uh.
+          -- rust-analyzer / tsserver / etc. still advertise the capability.
           map("n", "<leader>uh", function()
             vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = 0 }), { bufnr = 0 })
           end, "Toggle inlay hints")
@@ -129,17 +125,16 @@ return {
         },
       })
 
+      -- Prefer fast defaults: default features + `cargo check` on save.
+      -- Clippy / all-features are available via cargo CLI or a one-off
+      -- settings override when you need the heavier analysis.
+      -- Inlay hints stay available via the LspAttach enable + <leader>uh toggle.
       vim.lsp.config("rust_analyzer", {
         settings = {
           ["rust-analyzer"] = {
-            cargo = { allFeatures = true },
+            cargo = { allFeatures = false },
             checkOnSave = true,
-            check = { command = "clippy" },
-            inlayHints = {
-              parameterHints = { enable = true },
-              typeHints = { enable = true },
-              chainingHints = { enable = true },
-            },
+            check = { command = "check" },
           },
         },
       })
