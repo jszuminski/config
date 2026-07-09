@@ -20,7 +20,7 @@ return {
       lazy = true,
       mason = true,
       help = true,
-      ["neo-tree"] = true,
+      oil = true,
     }
 
     local function nav(direction)

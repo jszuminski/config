@@ -11,7 +11,7 @@ return {
       untracked = { text = "▎" },
     },
     on_attach = function(buffer)
-      local gs = package.loaded.gitsigns
+      local gs = require("gitsigns")
       local map = function(mode, lhs, rhs, desc)
         vim.keymap.set(mode, lhs, rhs, { buffer = buffer, desc = desc })
       end
