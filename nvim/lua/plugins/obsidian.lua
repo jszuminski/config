@@ -1,16 +1,23 @@
+-- Only load inside the Obsidian vault (or when an <leader>o* keymap is used).
+-- Loading on every `ft = markdown` paid for vault indexing on READMEs in code repos.
+local vault = vim.fn.expand("~/Documents/jsafe")
+
 return {
   "obsidian-nvim/obsidian.nvim",
   -- stay on 3.x releases; this plugin touches the whole vault, so a major
   -- bump should be a deliberate migration
   version = "3.*",
-  ft = "markdown",
+  event = {
+    "BufReadPre " .. vault .. "/**.md",
+    "BufNewFile " .. vault .. "/**.md",
+  },
   -- opts is a function so `require("obsidian.builtin")` resolves only after
   -- the plugin is on the runtimepath (avoids a load-order error at startup).
   opts = function()
     return {
       legacy_commands = false,
       workspaces = {
-        { name = "jsafe", path = "~/Documents/jsafe" },
+        { name = "jsafe", path = vault },
       },
 
       -- SAFETY: never inject/normalize YAML frontmatter in existing notes.
