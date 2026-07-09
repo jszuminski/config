@@ -24,7 +24,6 @@ return {
         globalstatus = true,
         component_separators = "",
         section_separators = "",
-        disabled_filetypes = { statusline = { "dashboard", "alpha" } },
       },
       sections = {
         lualine_a = { { "mode", fmt = function(s) return s:sub(1, 1) end } },
