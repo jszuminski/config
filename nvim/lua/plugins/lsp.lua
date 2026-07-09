@@ -7,14 +7,9 @@ return {
       ui = { border = "rounded" },
     },
   },
-  {
-    "williamboman/mason-lspconfig.nvim",
-    dependencies = { "williamboman/mason.nvim" },
-    opts = {
-      ensure_installed = {},
-      automatic_enable = false,
-    },
-  },
+  -- Install binaries only. Servers are enabled below via vim.lsp.enable();
+  -- mason-lspconfig is intentionally omitted (it had empty ensure_installed
+  -- and automatic_enable = false, so it added load cost for no benefit).
   {
     "WhoIsSethDaniel/mason-tool-installer.nvim",
     event = "VeryLazy",
@@ -47,7 +42,6 @@ return {
     event = { "BufReadPre", "BufNewFile" },
     dependencies = {
       "williamboman/mason.nvim",
-      "williamboman/mason-lspconfig.nvim",
       "saghen/blink.cmp",
     },
     config = function()
