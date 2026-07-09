@@ -25,7 +25,47 @@ return {
     { "]y", "<Plug>(YankyCycleForward)", desc = "Yank ring: older entry" },
     { "[y", "<Plug>(YankyCycleBackward)", desc = "Yank ring: newer entry" },
 
-    -- fuzzy-search your registers/yanks via your existing fzf-lua
-    { "<leader>fy", function() require("fzf-lua").registers() end, desc = "Yanks / registers" },
+    -- Fuzzy-search the yank *ring* (not Vim registers). Previously this
+    -- called fzf-lua.registers(), which never saw Yanky's history.
+    {
+      "<leader>fy",
+      function()
+        local history = require("yanky.history").all()
+        if #history == 0 then
+          vim.notify("Yank history is empty", vim.log.levels.INFO)
+          return
+        end
+
+        local entries = {}
+        local by_label = {}
+        for i, item in ipairs(history) do
+          local text = item.regcontents or ""
+          local oneline = (text:gsub("\n", "\\n")):sub(1, 120)
+          local label = string.format("%3d  %s", i, oneline)
+          entries[#entries + 1] = label
+          by_label[label] = item
+        end
+
+        require("fzf-lua").fzf_exec(entries, {
+          prompt = "Yank history> ",
+          previewer = false,
+          actions = {
+            ["default"] = function(selected)
+              local item = selected and by_label[selected[1]]
+              if not item then
+                return
+              end
+              -- Put the chosen ring entry after the cursor (same as YankyRingHistory).
+              require("yanky.picker").actions.put("p")({
+                regcontents = item.regcontents,
+                regtype = item.regtype,
+                filetype = item.filetype,
+              })
+            end,
+          },
+        })
+      end,
+      desc = "Yank history",
+    },
   },
 }
