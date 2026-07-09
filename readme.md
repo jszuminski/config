@@ -35,6 +35,7 @@ in `zsh/zshrc`.
 
 ## cheatsheets
 
+- [nvim](nvim/README.md) — overview, plugins, and keymaps for this config
 - [tmux](https://tmuxcheatsheet.com/)
 - [aerospace](https://cheatography.com/stevend/cheat-sheets/aerospace-window-manager/?last=1734647419)
 - [git alias](https://www.hansschnedlitz.com/git-aliases/?ref=xaviergeerinck.com)
