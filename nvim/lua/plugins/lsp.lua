@@ -30,6 +30,7 @@ return {
         "basedpyright@1.39.9",
         "ruff@0.15.20",
         "rust-analyzer@2026-06-29",
+        "clangd@22.1.6",
         "stylua@v2.5.2",
         "prettierd@0.28.0",
       },
@@ -141,7 +142,7 @@ return {
 
       vim.lsp.enable({
         "vtsls", "eslint", "jsonls", "html", "cssls", "tailwindcss", "astro", "svelte",
-        "lua_ls", "basedpyright", "ruff", "rust_analyzer",
+        "lua_ls", "basedpyright", "ruff", "rust_analyzer", "clangd",
       })
     end,
   },

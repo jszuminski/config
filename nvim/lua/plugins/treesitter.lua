@@ -14,7 +14,7 @@ return {
         "lua", "vim", "vimdoc", "query",
         "typescript", "tsx", "javascript", "json", "jsonc",
         "html", "css", "astro", "svelte",
-        "bash", "python", "go", "rust", "sql",
+        "bash", "c", "python", "go", "rust", "sql",
         "markdown", "markdown_inline", "yaml", "toml",
         "gitcommit", "gitignore", "diff",
       },

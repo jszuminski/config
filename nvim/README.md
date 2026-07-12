@@ -79,6 +79,7 @@ Installed via Mason (pins in `lua/plugins/lsp.lua`):
 - **Web** — json/html/css LSPs, tailwind, astro, svelte
 - **Python** — basedpyright, ruff (format + organize imports on save)
 - **Rust** — rust-analyzer (`cargo check` on save; inlays off until `<leader>uh`)
+- **C** — clangd (format on save via clangd's built-in clang-format; respects `.clang-format`)
 
 Treesitter also installs parsers for go/sql/bash/yaml/toml/markdown/git, etc.
 There is **no Go LSP** configured — only the parser.
