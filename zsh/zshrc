@@ -127,6 +127,7 @@ alias cdcode='cd ~/Documents/coding/'
 alias cdmog='cd ~/Documents/coding/mog-monorepo'
 alias cdcvim='cd ~/Documents/coding/crackedvim'
 alias cdjsafe='cd ~/Documents/jsafe'
+alias nv='nvim .'
 
 # ---------------------------------------------------------------------------
 # Key bindings: edit current command line in nvim with Ctrl+G
