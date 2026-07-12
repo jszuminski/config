@@ -83,6 +83,18 @@ vim.api.nvim_create_autocmd("ColorScheme", {
 })
 apply_hl_overrides() -- apply on first load too
 
+-- Don't auto-continue comments on new lines. Ftplugins (e.g. C's) re-add
+-- these flags after user config runs, so this must be a FileType autocmd
+-- rather than a plain `set formatoptions-=...` in options.lua.
+--   r = continue comment when hitting <Enter> in insert mode
+--   o = continue comment when opening a line with `o`/`O`
+vim.api.nvim_create_autocmd("FileType", {
+  group = aug,
+  callback = function()
+    vim.opt_local.formatoptions:remove({ "r", "o" })
+  end,
+})
+
 local wrap_filetypes = { markdown = true, text = true, gitcommit = true, mail = true, svelte = true, rust = true }
 vim.api.nvim_create_autocmd({ "FileType", "BufWinEnter" }, {
   group = aug,
